@@ -11,8 +11,13 @@ class CreativeAtomDTO {
     String title
     String externalUrl
 
+    File file
+    String originalFilename
+
     static constraints = {
         title nullable: true
         externalUrl nullable: true
+        file nullable: true
+        originalFilename nullable: true
     }
 }

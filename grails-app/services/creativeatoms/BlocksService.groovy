@@ -6,7 +6,7 @@ import ru.mirari.infra.ApplicationContextHolder
 import ru.mirari.infra.ca.face.CreativeAtomRepo
 import ru.mirari.infra.ca.face.CreativeAtomContentRepo
 
-class BlocksService extends CreativeAtomsService<Block, BlockContent> {
+class BlocksService extends CreativeAtomsService<Block, BlockContent, BlockRawContent> {
     @PostConstruct
     void init() {
         creativeAtomContentRepo = ApplicationContextHolder.getBean("blockContentsRepoService") as CreativeAtomContentRepo<BlockContent>

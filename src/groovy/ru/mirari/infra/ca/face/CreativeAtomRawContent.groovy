@@ -2,9 +2,9 @@ package ru.mirari.infra.ca.face
 
 /**
  * @author alari
- * @since 9/1/12 9:22 PM
+ * @since 9/1/12 11:39 PM
  */
-interface CreativeAtomContent {
+public interface CreativeAtomRawContent {
     void setText(String text)
     String getText()
 }

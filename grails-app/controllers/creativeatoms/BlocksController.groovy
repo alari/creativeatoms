@@ -2,6 +2,8 @@ package creativeatoms
 
 import ru.mirari.infra.ca.atom.CreativeAtomDTO
 import ru.mirari.infra.ca.CreativeAtomsService
+import org.springframework.web.multipart.commons.CommonsMultipartFile
+import org.springframework.web.multipart.MultipartHttpServletRequest
 
 class BlocksController {
 
@@ -16,6 +18,17 @@ class BlocksController {
     }
 
     def create(CreativeAtomDTO creativeAtomDTO) {
+
+        if (request instanceof MultipartHttpServletRequest) {
+            MultipartHttpServletRequest mpr = (MultipartHttpServletRequest) request;
+            CommonsMultipartFile f = (CommonsMultipartFile) mpr.getFile("file");
+            creativeAtomDTO.originalFilename = f.originalFilename
+
+            File file = File.createTempFile("atom", "ca")
+            f.transferTo(file)
+            creativeAtomDTO.file = file
+        }
+
         if (creativeAtomDTO.validate()) {
             Block block = blocksService.create(creativeAtomDTO)
             block.save()

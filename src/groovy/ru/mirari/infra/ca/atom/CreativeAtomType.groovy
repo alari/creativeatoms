@@ -1,7 +1,7 @@
 package ru.mirari.infra.ca.atom
 
 import ru.mirari.infra.ApplicationContextHolder
-import ru.mirari.infra.ca.CreativeAtomStrategy
+import ru.mirari.infra.ca.content.CreativeAtomStrategy
 
 /**
  * @author alari
@@ -9,7 +9,11 @@ import ru.mirari.infra.ca.CreativeAtomStrategy
  */
 public enum CreativeAtomType {
     YOUTUBE("youTube"),
-    RUSSIARU("russiaRu");
+    RUSSIARU("russiaRu"),
+
+    TEXT("text"),
+    IMAGE("image"),
+    SOUND("sound");
 
     private static Map<String,CreativeAtomType> byName = [:]
 

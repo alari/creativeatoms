@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.atom
+package ru.mirari.infra.ca.content
 
 import ru.mirari.infra.ca.face.CreativeAtom
 

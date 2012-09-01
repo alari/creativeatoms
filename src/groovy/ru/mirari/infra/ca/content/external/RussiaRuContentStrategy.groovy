@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.external
+package ru.mirari.infra.ca.content.external
 
 import ru.mirari.infra.ca.face.CreativeAtom
 import org.springframework.stereotype.Component

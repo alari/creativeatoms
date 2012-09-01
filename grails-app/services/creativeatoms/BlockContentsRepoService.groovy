@@ -4,7 +4,7 @@ import ru.mirari.infra.ca.face.CreativeAtomContentRepo
 
 class BlockContentsRepoService implements CreativeAtomContentRepo<BlockContent> {
 
-    def serviceMethod() {
-
+    BlockContent create() {
+        new BlockContent()
     }
 }

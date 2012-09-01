@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.external
+package ru.mirari.infra.ca.content.external
 
 import org.apache.http.client.utils.URLEncodedUtils
 import ru.mirari.infra.ca.face.CreativeAtom
