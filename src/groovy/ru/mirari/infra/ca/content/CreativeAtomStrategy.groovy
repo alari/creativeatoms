@@ -1,8 +1,10 @@
 package ru.mirari.infra.ca.content
 
 import org.springframework.stereotype.Component
+import ru.mirari.infra.ca.atom.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.file.FileInfo
+import ru.mirari.infra.ca.atom.CreativeAtomContentDTO
 
 /**
  * @author alari
@@ -10,7 +12,7 @@ import ru.mirari.infra.file.FileInfo
  */
 @Component
 abstract class CreativeAtomStrategy {
-    void setContentFile(CreativeAtom atom, FileInfo fileInfo){}
+    void setContentFile(CreativeAtom atom, FileInfo fileInfo) {}
 
     boolean isEmpty(CreativeAtom atom) {false}
 
@@ -24,5 +26,33 @@ abstract class CreativeAtomStrategy {
 
     void deleteContent(CreativeAtom atom) {
         void
+    }
+
+    boolean setContent(CreativeAtom atom, CreativeAtomPushDTO dto) {
+        if (dto.externalUrl) {
+            // By external url
+            try {
+                URL url = new URL(dto.externalUrl)
+                if (isUrlSupported(url)) {
+                    buildContentByUrl(atom, url)
+                    return true
+                }
+            }
+
+            catch (MalformedURLException e) {
+            }
+        }
+        if (dto.file) {
+            FileInfo fileInfo = new FileInfo(dto.file, dto.originalFilename)
+            if (isContentFileSupported(fileInfo)) {
+                setContentFile(atom, fileInfo)
+                return true
+            }
+        }
+        false
+    }
+
+    CreativeAtomContentDTO getContentDTO(CreativeAtom atom) {
+        new CreativeAtomContentDTO(atom)
     }
 }

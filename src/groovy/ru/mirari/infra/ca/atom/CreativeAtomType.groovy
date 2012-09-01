@@ -10,19 +10,20 @@ import ru.mirari.infra.ca.content.CreativeAtomStrategy
 public enum CreativeAtomType {
     YOUTUBE("youTube"),
     RUSSIARU("russiaRu"),
+    LINK("link"),
 
     TEXT("text"),
     IMAGE("image"),
     SOUND("sound");
 
-    private static Map<String,CreativeAtomType> byName = [:]
+    private static Map<String, CreativeAtomType> byName = [:]
 
     static {
         for (CreativeAtomType t in CreativeAtomType.values()) byName.put(t.name, t)
     }
 
     static CreativeAtomType byName(final String typeName) {
-        if(!byName.containsKey(typeName)) throw new IllegalArgumentException("Unknown CA type ${typeName}")
+        if (!byName.containsKey(typeName)) throw new IllegalArgumentException("Unknown CA type ${typeName}")
         byName.get(typeName)
     }
 
@@ -38,10 +39,10 @@ public enum CreativeAtomType {
     }
 
     CreativeAtomStrategy getStrategy() {
-        if(strategy == null) {
+        if (strategy == null) {
             synchronized (this) {
-                if(!strategy) {
-                    strategy = (CreativeAtomStrategy)ApplicationContextHolder.getBean("${name}ContentStrategy")
+                if (!strategy) {
+                    strategy = (CreativeAtomStrategy) ApplicationContextHolder.getBean("${name}ContentStrategy")
                 }
             }
         }

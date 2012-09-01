@@ -1,8 +1,10 @@
 package ru.mirari.infra.ca.content.external
 
 import org.apache.http.client.utils.URLEncodedUtils
-import ru.mirari.infra.ca.face.CreativeAtom
 import org.springframework.stereotype.Component
+import ru.mirari.infra.ca.face.CreativeAtom
+import ru.mirari.infra.ca.atom.CreativeAtomContentDTO
+import ru.mirari.infra.ca.content.CreativeAtomData
 
 /**
  * @author alari
@@ -26,5 +28,12 @@ class YouTubeContentStrategy extends ExternalContentStrategy {
     @Override
     boolean isUrlSupported(URL url) {
         return url.host == "youtu.be" || (url.host == "www.youtube.com" && url.path == "/watch")
+    }
+
+    @Override
+    CreativeAtomContentDTO getContentDTO(CreativeAtom atom) {
+        CreativeAtomContentDTO dto = super.getContentDTO(atom)
+        dto.externalId = getExternalId(atom)
+        dto
     }
 }

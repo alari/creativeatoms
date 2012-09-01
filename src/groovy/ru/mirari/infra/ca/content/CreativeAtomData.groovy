@@ -22,7 +22,7 @@ public enum CreativeAtomData {
 
     Set<String> getSetFrom(CreativeAtom atom) {
         String data = atom.getContentData(key)
-        if(!data) {
+        if (!data) {
             return null
         }
         Set result = []

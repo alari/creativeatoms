@@ -1,11 +1,12 @@
 package ru.mirari.infra.ca.content.file
 
-import ru.mirari.infra.file.FileHolder
-import ru.mirari.infra.file.FileInfo
-import ru.mirari.infra.ca.face.CreativeAtom
 import org.springframework.stereotype.Component
 import ru.mirari.infra.ca.content.CreativeAtomData
 import ru.mirari.infra.ca.content.CreativeAtomSoundType
+import ru.mirari.infra.ca.face.CreativeAtom
+import ru.mirari.infra.file.FileHolder
+import ru.mirari.infra.file.FileInfo
+import ru.mirari.infra.ca.atom.CreativeAtomContentDTO
 
 /**
  * @author alari
@@ -65,5 +66,19 @@ class SoundContentStrategy extends FilesHolderContentStrategy {
         holder.fileNames = getFileNames(unit)
         fileStorageService.delete(holder)
         CreativeAtomData.SOUND_TYPES.putTo(unit, "")
+    }
+
+    @Override
+    CreativeAtomContentDTO getContentDTO(CreativeAtom atom) {
+        CreativeAtomContentDTO dto = super.getContentDTO(atom)
+
+        dto.sounds = [:]
+
+        FileHolder holder = getFileHolder(atom)
+        for (String s: getSoundTypes(atom)) {
+            dto.sounds.put(s, fileStorageService.getUrl(holder, CreativeAtomSoundType.forName(s).filename))
+        }
+
+        dto
     }
 }

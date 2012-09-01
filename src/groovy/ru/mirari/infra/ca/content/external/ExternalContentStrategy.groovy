@@ -1,8 +1,8 @@
 package ru.mirari.infra.ca.content.external
 
-import ru.mirari.infra.ca.face.CreativeAtom
-import ru.mirari.infra.ca.content.CreativeAtomStrategy
 import ru.mirari.infra.ca.content.CreativeAtomData
+import ru.mirari.infra.ca.content.CreativeAtomStrategy
+import ru.mirari.infra.ca.face.CreativeAtom
 
 /**
  * @author alari
@@ -15,12 +15,12 @@ abstract class ExternalContentStrategy extends CreativeAtomStrategy {
     }
 
 
-        void setExternalId(CreativeAtom atom, String id) {
-            CreativeAtomData.EXTERNAL_ID.putTo(atom, id)
-        }
-
-        String getExternalId(CreativeAtom atom) {
-            CreativeAtomData.EXTERNAL_ID.getFrom(atom)
-        }
+    void setExternalId(CreativeAtom atom, String id) {
+        CreativeAtomData.EXTERNAL_ID.putTo(atom, id)
     }
+
+    String getExternalId(CreativeAtom atom) {
+        CreativeAtomData.EXTERNAL_ID.getFrom(atom)
+    }
+}
 

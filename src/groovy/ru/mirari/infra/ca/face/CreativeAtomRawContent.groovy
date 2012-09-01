@@ -6,5 +6,6 @@ package ru.mirari.infra.ca.face
  */
 public interface CreativeAtomRawContent {
     void setText(String text)
+
     String getText()
 }
