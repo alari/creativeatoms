@@ -68,6 +68,7 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
+grails.app.context = "/"
 
 // log4j configuration
 log4j = {

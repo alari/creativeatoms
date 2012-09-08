@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.atom
+package ru.mirari.infra.ca.atom.dto
 
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
@@ -19,11 +19,11 @@ class CreativeAtomContentBaseDTO implements CreativeAtomContentDTO {
     Map<String, String> sounds
     Map<String, String> images
 
-    CreativeAtomContentBaseDTO(){}
+    CreativeAtomContentBaseDTO() {}
 
     CreativeAtomContentBaseDTO(final CreativeAtom atom) {
         id = atom.atomId
         title = atom.title
-        type = atom.type.name
+        type = atom.type().name
     }
 }

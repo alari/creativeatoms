@@ -12,4 +12,19 @@ class BlocksRepoService implements CreativeAtomRepo<Block> {
     Block create() {
         new Block()
     }
+
+    @Override
+    Block get(Serializable id) {
+        Block.get(id) s
+    }
+
+    @Override
+    Block save(Block atom) {
+        atom.save()
+    }
+
+    @Override
+    void delete(Block atom) {
+        atom.delete()
+    }
 }

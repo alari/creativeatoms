@@ -1,8 +1,8 @@
 package ru.mirari.infra.ca.content
 
 import org.springframework.stereotype.Component
-import ru.mirari.infra.ca.atom.CreativeAtomContentBaseDTO
-import ru.mirari.infra.ca.atom.CreativeAtomUpdateBaseDTO
+import ru.mirari.infra.ca.atom.dto.CreativeAtomContentBaseDTO
+import ru.mirari.infra.ca.atom.dto.CreativeAtomUpdateBaseDTO
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO

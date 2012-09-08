@@ -5,7 +5,7 @@ import ru.mirari.infra.ca.face.CreativeAtomRawContent
 class BlockRawContent implements CreativeAtomRawContent {
 
     Block block
-    static belongsTo = [block:Block]
+    static belongsTo = [block: Block]
 
     String text
 

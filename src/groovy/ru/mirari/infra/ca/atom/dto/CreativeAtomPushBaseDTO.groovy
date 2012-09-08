@@ -1,8 +1,8 @@
-package ru.mirari.infra.ca.atom
+package ru.mirari.infra.ca.atom.dto
 
 import grails.validation.Validateable
-import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import org.springframework.web.multipart.commons.CommonsMultipartFile
+import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 
 /**
  * @author alari
@@ -28,12 +28,12 @@ class CreativeAtomPushBaseDTO implements CreativeAtomPushDTO {
 
     public CreativeAtomPushBaseDTO(final Map params) {
         params?.each { String k, v ->
-            if(!this.hasProperty(k)) return;
-            if(k == "file") return;
+            if (!this.hasProperty(k)) return;
+            if (k == "file") return;
             this[k] = v
         }
-        if(params['file'] instanceof CommonsMultipartFile) {
-            CommonsMultipartFile f = (CommonsMultipartFile)params['file']
+        if (params['file'] instanceof CommonsMultipartFile) {
+            CommonsMultipartFile f = (CommonsMultipartFile) params['file']
             file = File.createTempFile("atom", "ca")
             f.transferTo(file)
             originalFilename = f.originalFilename

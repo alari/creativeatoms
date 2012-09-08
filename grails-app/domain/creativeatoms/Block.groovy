@@ -1,46 +1,23 @@
 package creativeatoms
 
-import ru.mirari.infra.ca.face.CreativeAtom
-import ru.mirari.infra.ca.atom.CreativeAtomType
+import ru.mirari.infra.ca.CreativeAtomBase
 
-import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
-import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
-
-class Block implements CreativeAtom<BlockContent,BlockRawContent> {
-
-    def getAtomId() {
-        id
-    }
-
-    String title
-    CreativeAtomType type
-
-    Map<String,String> data = [:]
-
+class Block extends CreativeAtomBase<BlockContent, BlockRawContent> {
     private BlockContent content
     private BlockRawContent rawContent
-
-    static hasOne = [content: BlockContent, rawContent: BlockRawContent]
 
     static constraints = {
         content nullable: true
         rawContent nullable: true
     }
 
-    @Override
-    String getContentData(String key) {
-        data.get(key)
-    }
-
-    @Override
-    void setContentData(String key, String value) {
-        data.put(key, value)
-    }
+    static hasOne = [content: BlockContent, rawContent: BlockRawContent]
 
     @Override
     void setContent(BlockContent content) {
         this.content = content
     }
+
     @Override
     public BlockContent getContent() {
         content
@@ -52,21 +29,7 @@ class Block implements CreativeAtom<BlockContent,BlockRawContent> {
     }
 
     @Override
-    CreativeAtomContentDTO getContentDTO() {
-        type.strategy.getContentDTO(this)
-    }
-
-    @Override
-    CreativeAtomUpdateDTO getUpdateDTO() {
-        type.strategy.getUpdateDTO(this)
-    }
-
-    @Override
     public BlockRawContent getRawContent() {
         rawContent
-    }
-
-    def beforeDelete() {
-        type.strategy.deleteContent(this)
     }
 }

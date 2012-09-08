@@ -6,4 +6,10 @@ package ru.mirari.infra.ca.face
  */
 public interface CreativeAtomRepo<A extends CreativeAtom> {
     A create()
+
+    A get(Serializable id)
+
+    A save(A atom)
+
+    void delete(A atom)
 }

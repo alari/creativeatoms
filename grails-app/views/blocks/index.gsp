@@ -6,33 +6,32 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <meta content="main" name="layout">
     <title>Blocks main</title>
 </head>
 
 <body>
 
 <g:form method="post" controller="restCreativeAtom" action="create" enctype="multipart/form-data">
-    <g:field type="text" name="title" placeholder="title"/>
-    <g:field type="text" name="externalUrl" placeholder="external-url"/>
     <g:field type="file" name="file" placeholder="file"/>
-    <g:textArea name="text" rows="" cols=""/>
     <g:submitButton name="sbm"/>
 </g:form>
 
 <hr/>
 
-<g:each in="${blocks}" var="block">
-    <div>
-        <h1>${block.title}</h1>
-
-        <h2>${block.type}</h2>
-        <pre>${block.data}</pre>
-        <blockquote style="border:1px solid silver">
-            ${block.contentDTO}
-        </blockquote>
+<div ng-app="CreativeAtom" ng-controller="CreativeAtomCtr">
+    <fieldset>
+        <input placeholder="title" ng-model="newAtom.title"/>
+        <input placeholder="external url" ng-model="newAtom.externalUrl"/>
+        <textarea ng-model="newAtom.text"></textarea>
+        <button ng-click="push()">Submit</button>
+    </fieldset>
+    <div ng-repeat="atom in atoms">
+        <h4>{{atom.title}}</h4>
+        <h3>{{atom.type}}</h3>
+        <hr/>
     </div>
-    <hr/>
-</g:each>
+</div>
 
 </body>
 </html>

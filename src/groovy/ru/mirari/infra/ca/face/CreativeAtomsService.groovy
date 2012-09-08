@@ -11,4 +11,10 @@ public interface CreativeAtomsService<A extends CreativeAtom, C extends Creative
     A create(CreativeAtomPushDTO dto)
 
     boolean update(CreativeAtom atom, CreativeAtomUpdateDTO dto)
+
+    CreativeAtomPushDTO getPushDTO(Map params)
+
+    CreativeAtomUpdateDTO getUpdateDTO(Map params)
+
+    Collection<CreativeAtomType> getAtomTypes()
 }

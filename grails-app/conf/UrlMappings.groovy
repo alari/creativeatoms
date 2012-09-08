@@ -9,7 +9,7 @@ class UrlMappings {
 
         "/rest/creativeAtom/$id"(resource: "restCreativeAtom")
         "/rest/creativeAtom"(controller: "restCreativeAtom", parseRequest: true) {
-            action = [POST: "create"]
+            action = [POST: "create", GET: "query"]
         }
 
 		"/"(view:"/index")

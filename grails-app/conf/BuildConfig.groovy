@@ -50,13 +50,17 @@ grails.project.dependency.resolution = {
 
     plugins {
         runtime ":hibernate:$grailsVersion"
-        runtime ":jquery:1.7.2"
-        runtime ":resources:1.1.6"
+        runtime ":jquery:latest.integration"
+        runtime ":resources:latest.integration"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
-        //runtime ":yui-minify-resources:0.1.4"
+        //runtime ":yui-minify-resources:latest.integration"
+
+        compile ":twitter-bootstrap:latest.integration"
+        compile ":angularjs-resources:latest.integration"
+        compile ":coffeescript-resources:latest.integration"
 
         build ":tomcat:$grailsVersion"
 
