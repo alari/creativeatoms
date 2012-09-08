@@ -3,7 +3,8 @@ package creativeatoms
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.atom.CreativeAtomType
 
-import ru.mirari.infra.ca.atom.CreativeAtomContentBaseDTO
+import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
+import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 
 class Block implements CreativeAtom<BlockContent,BlockRawContent> {
 
@@ -51,8 +52,13 @@ class Block implements CreativeAtom<BlockContent,BlockRawContent> {
     }
 
     @Override
-    CreativeAtomContentBaseDTO getContentDTO() {
+    CreativeAtomContentDTO getContentDTO() {
         type.strategy.getContentDTO(this)
+    }
+
+    @Override
+    CreativeAtomUpdateDTO getUpdateDTO() {
+        type.strategy.getUpdateDTO(this)
     }
 
     @Override

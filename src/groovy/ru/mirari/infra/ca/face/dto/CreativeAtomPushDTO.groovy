@@ -5,11 +5,11 @@ package ru.mirari.infra.ca.face.dto
  * @since 9/8/12 2:05 PM
  */
 public interface CreativeAtomPushDTO {
-    String title
-    String externalUrl
+    public String getTitle()
+    public String getExternalUrl()
 
-    File file
-    String originalFilename
+    public File getFile()
+    public String getOriginalFilename()
 
-    String text
+    public String getText()
 }

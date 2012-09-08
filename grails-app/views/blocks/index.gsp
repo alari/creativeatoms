@@ -11,7 +11,7 @@
 
 <body>
 
-<g:form method="post" controller="blocks" action="create" enctype="multipart/form-data">
+<g:form method="post" controller="restCreativeAtom" action="create" enctype="multipart/form-data">
     <g:field type="text" name="title" placeholder="title"/>
     <g:field type="text" name="externalUrl" placeholder="external-url"/>
     <g:field type="file" name="file" placeholder="file"/>
