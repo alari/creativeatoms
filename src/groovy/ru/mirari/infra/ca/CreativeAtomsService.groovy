@@ -1,6 +1,6 @@
 package ru.mirari.infra.ca
 
-import ru.mirari.infra.ca.atom.CreativeAtomPushDTO
+import ru.mirari.infra.ca.atom.CreativeAtomPushBaseDTO
 import ru.mirari.infra.ca.atom.CreativeAtomType
 import ru.mirari.infra.ca.face.*
 
@@ -13,7 +13,7 @@ class CreativeAtomsService<A extends CreativeAtom, C extends CreativeAtomContent
     CreativeAtomContentRepo<C> creativeAtomContentRepo
     CreativeAtomRawContentRepo<R> creativeAtomRawContentRepo
 
-    A create(CreativeAtomPushDTO dto) {
+    A create(CreativeAtomPushBaseDTO dto) {
         A atom = creativeAtomRepo.create()
 
         for (CreativeAtomType type in getAtomTypes()) {

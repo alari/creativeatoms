@@ -2,13 +2,14 @@ package ru.mirari.infra.ca.content.internal
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import ru.mirari.infra.ca.atom.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.CreativeAtomContentRepo
 import ru.mirari.infra.ca.face.CreativeAtomRawContentRepo
+import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
+import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
+import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.file.FileInfo
 import ru.mirari.infra.text.TextProcessUtil
-import ru.mirari.infra.ca.atom.CreativeAtomContentDTO
 
 /**
  * @author alari
@@ -66,9 +67,16 @@ class TextContentStrategy extends InternalContentStrategy {
     }
 
     @Override
-    CreativeAtomContentDTO getContentDTO(CreativeAtom atom) {
-        CreativeAtomContentDTO dto = super.getContentDTO(atom)
+    CreativeAtomContentDTO getContentDTO(CreativeAtom atom, CreativeAtomContentDTO dto = null) {
+        dto = super.getContentDTO(atom, dto)
         dto.text = atom.content.text
+        dto
+    }
+
+    @Override
+    CreativeAtomUpdateDTO getUpdateDTO(CreativeAtom atom, CreativeAtomUpdateDTO dto = null) {
+        dto = super.getBaseUpdateDTO(atom, dto)
+        dto.text = atom.rawContent.text
         dto
     }
 }

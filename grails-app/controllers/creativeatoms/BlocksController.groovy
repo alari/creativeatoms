@@ -1,6 +1,6 @@
 package creativeatoms
 
-import ru.mirari.infra.ca.atom.CreativeAtomPushDTO
+import ru.mirari.infra.ca.atom.CreativeAtomPushBaseDTO
 import ru.mirari.infra.ca.CreativeAtomsService
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
@@ -17,7 +17,7 @@ class BlocksController {
         [blocks: blocksRepoService.list()]
     }
 
-    def create(CreativeAtomPushDTO creativeAtomDTO) {
+    def create(CreativeAtomPushBaseDTO creativeAtomDTO) {
 
         if (request instanceof MultipartHttpServletRequest) {
             MultipartHttpServletRequest mpr = (MultipartHttpServletRequest) request;

@@ -1,10 +1,13 @@
 package ru.mirari.infra.ca.content
 
 import org.springframework.stereotype.Component
-import ru.mirari.infra.ca.atom.CreativeAtomPushDTO
+import ru.mirari.infra.ca.atom.CreativeAtomContentBaseDTO
+import ru.mirari.infra.ca.atom.CreativeAtomUpdateBaseDTO
 import ru.mirari.infra.ca.face.CreativeAtom
+import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
+import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
+import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.file.FileInfo
-import ru.mirari.infra.ca.atom.CreativeAtomContentDTO
 
 /**
  * @author alari
@@ -52,7 +55,16 @@ abstract class CreativeAtomStrategy {
         false
     }
 
-    CreativeAtomContentDTO getContentDTO(CreativeAtom atom) {
-        new CreativeAtomContentDTO(atom)
+    CreativeAtomContentDTO getContentDTO(CreativeAtom atom, CreativeAtomContentDTO dto = null) {
+        dto ?: new CreativeAtomContentBaseDTO(atom)
+    }
+
+    CreativeAtomUpdateDTO getUpdateDTO(CreativeAtom atom, CreativeAtomUpdateDTO dto = null) {
+        if (!dto) dto = getBaseUpdateDTO(atom, dto)
+        (CreativeAtomUpdateDTO) getContentDTO(atom, dto)
+    }
+
+    protected CreativeAtomUpdateDTO getBaseUpdateDTO(CreativeAtom atom, CreativeAtomUpdateDTO dto = null) {
+        dto ?: new CreativeAtomUpdateBaseDTO(atom)
     }
 }

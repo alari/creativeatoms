@@ -1,13 +1,14 @@
 package ru.mirari.infra.ca.atom
 
 import grails.validation.Validateable
+import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 
 /**
  * @author alari
  * @since 9/1/12 10:10 PM
  */
 @Validateable
-class CreativeAtomPushDTO {
+class CreativeAtomPushBaseDTO implements CreativeAtomPushDTO {
     String title
     String externalUrl
 

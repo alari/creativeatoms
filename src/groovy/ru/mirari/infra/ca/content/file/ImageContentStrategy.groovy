@@ -6,10 +6,10 @@ import ru.mirari.infra.ca.content.internal.InternalContentStrategy
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.CreativeAtomImageHolder
 import ru.mirari.infra.ca.face.CreativeAtomImageHolderProvider
+import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.file.FileInfo
-import ru.mirari.infra.image.ImageStorageService
-import ru.mirari.infra.ca.atom.CreativeAtomContentDTO
 import ru.mirari.infra.image.ImageFormat
+import ru.mirari.infra.image.ImageStorageService
 
 /**
  * @author alari
@@ -44,12 +44,12 @@ class ImageContentStrategy extends InternalContentStrategy {
     }
 
     @Override
-    CreativeAtomContentDTO getContentDTO(CreativeAtom atom) {
-        CreativeAtomContentDTO dto = super.getContentDTO(atom)
+    CreativeAtomContentDTO getContentDTO(CreativeAtom atom, CreativeAtomContentDTO dto = null) {
+        dto = super.getContentDTO(atom, dto)
 
         dto.images = [:]
         CreativeAtomImageHolder holder = getImageHolder(atom)
-        holder.imageFormats.each {ImageFormat format->
+        holder.imageFormats.each {ImageFormat format ->
             dto.images.put(format.name, imageStorageService.getUrl(holder, format))
         }
 

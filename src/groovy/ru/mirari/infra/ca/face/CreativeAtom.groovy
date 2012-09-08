@@ -1,7 +1,7 @@
 package ru.mirari.infra.ca.face
 
+import ru.mirari.infra.ca.atom.CreativeAtomContentBaseDTO
 import ru.mirari.infra.ca.atom.CreativeAtomType
-import ru.mirari.infra.ca.atom.CreativeAtomContentDTO
 
 /**
  * @author alari
@@ -30,5 +30,5 @@ public interface CreativeAtom<C extends CreativeAtomContent, R extends CreativeA
 
     void setRawContent(R rawContent)
 
-    CreativeAtomContentDTO getContentDTO()
+    CreativeAtomContentBaseDTO getContentDTO()
 }
