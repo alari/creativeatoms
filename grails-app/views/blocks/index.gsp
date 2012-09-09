@@ -26,10 +26,9 @@
         <textarea ng-model="newAtom.text"></textarea>
         <button ng-click="push()">Submit</button>
     </fieldset>
+
     <div ng-repeat="atom in atoms">
-        <h4>{{atom.title}}</h4>
-        <h3>{{atom.type}}</h3>
-        <hr/>
+        <div ng-include src="'/html/atom/'+atom.type+'.html?5'"></div>
     </div>
 </div>
 

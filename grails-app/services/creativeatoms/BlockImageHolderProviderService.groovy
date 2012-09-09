@@ -8,6 +8,6 @@ class BlockImageHolderProviderService implements CreativeAtomImageHolderProvider
 
     @Override
     CreativeAtomImageHolder getImageHolder(CreativeAtom atom) {
-        new BlockImageHolder(atom.id)
+        new BlockImageHolder(atom.atomId)
     }
 }

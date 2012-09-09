@@ -13,14 +13,14 @@ import ru.mirari.infra.ca.atom.CreativeAtomBasicType
  * @since 9/8/12 11:28 PM
  */
 abstract class CreativeAtomBase<C extends CreativeAtomContent, R extends CreativeAtomRawContent> implements CreativeAtom<C,R> {
-    String title
+    String title = ""
 
-    String typeName
+    String typeName = ""
 
     Map<String,String> data = [:]
 
     def getAtomId() {
-        id
+        getId()
     }
 
     @Override

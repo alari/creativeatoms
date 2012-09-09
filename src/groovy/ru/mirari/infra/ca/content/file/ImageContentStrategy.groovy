@@ -27,10 +27,10 @@ class ImageContentStrategy extends InternalContentStrategy {
     }
 
     @Override
-    void setContentFile(CreativeAtom unit, FileInfo fileInfo) {
+    void setContentFile(CreativeAtom atom, FileInfo fileInfo) {
         if (!isContentFileSupported(fileInfo)) return;
-        imageStorageService.format(getImageHolder(unit), fileInfo.file)
-        unit.title = fileInfo.title
+        imageStorageService.format(getImageHolder(atom), fileInfo.file)
+        atom.title = fileInfo.title
     }
 
     @Override
