@@ -8,6 +8,8 @@ import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.file.FileInfo
+import org.springframework.beans.factory.annotation.Autowired
+import ru.mirari.infra.ca.face.CreativeAtomRepo
 
 /**
  * @author alari
@@ -15,6 +17,8 @@ import ru.mirari.infra.file.FileInfo
  */
 @Component
 abstract class CreativeAtomStrategy {
+    @Autowired CreativeAtomRepo creativeAtomRepo
+
     void setContentFile(CreativeAtom atom, FileInfo fileInfo) {}
 
     boolean isEmpty(CreativeAtom atom) {false}
@@ -32,7 +36,7 @@ abstract class CreativeAtomStrategy {
     }
 
     boolean setContent(CreativeAtom atom, CreativeAtomPushDTO dto) {
-        if (dto.externalUrl) {
+        if (dto.externalUrl && isExternal()) {
             // By external url
             try {
                 URL url = new URL(dto.externalUrl)
@@ -48,6 +52,7 @@ abstract class CreativeAtomStrategy {
         if (dto.file) {
             FileInfo fileInfo = new FileInfo(dto.file, dto.originalFilename)
             if (isContentFileSupported(fileInfo)) {
+                creativeAtomRepo.save(atom)
                 setContentFile(atom, fileInfo)
                 return true
             }

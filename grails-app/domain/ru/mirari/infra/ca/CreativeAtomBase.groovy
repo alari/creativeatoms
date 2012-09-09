@@ -54,6 +54,6 @@ abstract class CreativeAtomBase<C extends CreativeAtomContent, R extends Creativ
     }
 
     def beforeDelete() {
-        type().strategy.deleteContent(this)
+        type()?.strategy?.deleteContent(this)
     }
 }

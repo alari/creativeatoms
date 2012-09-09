@@ -11,5 +11,5 @@ exports.CreativeAtomCtr = ($scope, CreativeAtom)->
 
   $scope.push = ->
     $scope.newAtom.$save ->
-      $scope.atoms.unshift $scope.newAtom if $scope.newAtom.title
+      $scope.atoms.unshift $scope.newAtom if $scope.newAtom.type
       $scope.newAtom = new CreativeAtom()

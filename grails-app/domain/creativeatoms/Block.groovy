@@ -7,8 +7,8 @@ class Block extends CreativeAtomBase<BlockContent, BlockRawContent> {
     private BlockRawContent rawContent
 
     static constraints = {
-        content nullable: true
-        rawContent nullable: true
+        content nullable: true, unique: true
+        rawContent nullable: true, unique: true
     }
 
     static hasOne = [content: BlockContent, rawContent: BlockRawContent]

@@ -23,7 +23,6 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
     @Override
     A create(CreativeAtomPushDTO dto) {
         A atom = creativeAtomRepo.create()
-        if (!creativeAtomRepo.save(atom)) return;
 
         for (CreativeAtomType type in atomTypes) {
             if (type.strategy.setContent(atom, dto)) {
@@ -39,6 +38,9 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
 
         if (!atom.type()) {
             creativeAtomRepo.delete(atom)
+            atom = null
+        } else {
+            creativeAtomRepo.save(atom)
         }
 
         atom

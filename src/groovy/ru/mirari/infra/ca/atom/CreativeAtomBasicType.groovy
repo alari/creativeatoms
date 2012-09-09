@@ -24,7 +24,6 @@ public enum CreativeAtomBasicType implements CreativeAtomType {
     }
 
     static CreativeAtomBasicType byName(final String typeName) {
-        if (!byName.containsKey(typeName)) throw new IllegalArgumentException("Unknown CA type ${typeName}")
         byName.get(typeName)
     }
 

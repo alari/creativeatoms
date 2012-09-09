@@ -24,12 +24,13 @@ class RestCreativeAtomController {
 
         if (dto.validate()) {
             CreativeAtom atom = creativeAtomsService.create(dto)
-            if (creativeAtomRepo.save(atom)) {
+            if (atom) {
                 render atom.contentDTO as JSON
                 return;
             }
         }
         response.status = 400
+        render "error"
     }
 
     def show(id) {
