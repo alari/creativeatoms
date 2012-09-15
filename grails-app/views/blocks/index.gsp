@@ -8,19 +8,15 @@
 <head>
     <meta content="main" name="layout">
     <title>Blocks main</title>
+    <r:require modules="jquery-file-upload,angular-ui"/>
 </head>
 
 <body>
 
-<g:form method="post" controller="restCreativeAtom" action="create" enctype="multipart/form-data">
-    <g:field type="file" name="file" placeholder="file"/>
-    <g:submitButton name="sbm"/>
-</g:form>
-
-<hr/>
-
 <div ng-app="CreativeAtom" ng-controller="CreativeAtomCtr">
+
     <fieldset>
+        <input type="file" name="file" data-url="/rest/creativeAtom" ui-jq="fileupload" ui-options="{dataType:'json',add:pushFile,done:fileDone}" />
         <input placeholder="title" ng-model="newAtom.title"/>
         <input placeholder="external url" ng-model="newAtom.externalUrl"/>
         <textarea ng-model="newAtom.text"></textarea>
@@ -28,7 +24,7 @@
     </fieldset>
 
     <div ng-repeat="atom in atoms">
-        <div ng-include src="'/html/atom/'+atom.type+'.html?5'"></div>
+        <div ng-include src="'/html/atom/'+atom.type+'.html'"></div>
     </div>
 </div>
 
