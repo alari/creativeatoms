@@ -1,4 +1,2 @@
 <h1>{{atom.title}}</h1>
-<b style="color: red">TODO: Сделать директиву для биндинга звука, билдить в ней мпег</b><br/>
-<audio data-bind="audio: '/js/vendor/mediaelement/'"
-       ng-src="{{atom.sounds['mpeg']}}"></audio>
+<audio bind-audio src="atom.sounds['mpeg']"></audio>      asdasd

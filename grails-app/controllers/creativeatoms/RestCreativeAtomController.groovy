@@ -16,6 +16,7 @@ class RestCreativeAtomController {
     CreativeAtomRepo creativeAtomRepo
 
     def query() {
+        println creativeAtomRepo.list()*.properties
         render creativeAtomRepo.list()*.contentDTO as JSON
     }
 

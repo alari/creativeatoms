@@ -3,6 +3,13 @@ exports = this
 angular.module("CreativeAtom", ['ngResource','ui'])
   .factory 'CreativeAtom', ($resource)->
      $resource '/rest/creativeAtom/:id'
+  .directive "bindAudio", ->
+     (scope, element, attrs)->
+       element.attr "src", scope.$eval("atom.sounds['mpeg']")
+       console.log element
+       $(element).mediaelementplayer
+         pluginPath: "/vendor/mediaelement/"
+         src: scope.$eval("atom.sounds['mpeg']")
 
 exports.CreativeAtomCtr = ($scope, CreativeAtom)->
   $scope.atoms = CreativeAtom.query()

@@ -8,7 +8,7 @@
 <head>
     <meta content="main" name="layout">
     <title>Blocks main</title>
-    <r:require modules="jquery-file-upload,angular-ui"/>
+    <r:require modules="jquery-file-upload,angular-ui,mediaelementplayer"/>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
     </fieldset>
 
     <div ng-repeat="atom in atoms">
-        <div ng-include src="'/html/atom/'+atom.type+'.html'"></div>
+        <div ng-include src="'/html/atom/'+atom.type+'.html?12'"></div>
     </div>
 </div>
 
