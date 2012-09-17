@@ -5,11 +5,17 @@ angular.module("CreativeAtom", ['ngResource','ui'])
      $resource '/rest/creativeAtom/:id'
   .directive "bindAudio", ->
      (scope, element, attrs)->
-       element.attr "src", scope.$eval("atom.sounds['mpeg']")
-       console.log element
+       element.attr "src", scope.$eval(attrs['bindAudio'])
        $(element).mediaelementplayer
          pluginPath: "/vendor/mediaelement/"
          src: scope.$eval("atom.sounds['mpeg']")
+  .directive "russiaRu", ->
+     (scope, element, attrs)->
+       externalId = scope.$eval(attrs['russiaRu'])
+       $(element).html("<embed name='playerblog#{externalId}'
+                src='http://www.russia.ru/player/main.swf?103'
+flashvars='name=#{externalId}&from=blog&blog=true' width='448' height='252'
+bgcolor='#000000' allowScriptAccess='always' allowFullScreen='true'></embed>")
 
 exports.CreativeAtomCtr = ($scope, CreativeAtom)->
   $scope.atoms = CreativeAtom.query()

@@ -24,7 +24,7 @@
     </fieldset>
 
     <div ng-repeat="atom in atoms">
-        <div ng-include src="'/html/atom/'+atom.type+'.html?12'"></div>
+        <div ng-include src="'/html/atom/'+atom.type+'.html?13'"></div>
     </div>
 </div>
 
