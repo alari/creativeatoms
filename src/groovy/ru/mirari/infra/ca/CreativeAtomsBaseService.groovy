@@ -1,12 +1,12 @@
 package ru.mirari.infra.ca
 
 import org.springframework.beans.factory.annotation.Autowired
-import ru.mirari.infra.ca.atom.CreativeAtomBasicType
 import ru.mirari.infra.ca.atom.dto.CreativeAtomPushBaseDTO
 import ru.mirari.infra.ca.atom.dto.CreativeAtomUpdateBaseDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.ca.face.*
+import ru.mirari.infra.ca.content.CreativeAtomTypesHolder
 
 /**
  * @author alari
@@ -23,16 +23,11 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
     @Override
     A create(CreativeAtomPushDTO dto) {
         A atom = creativeAtomRepo.create()
-
         for (CreativeAtomType type in atomTypes) {
             if (type.strategy.setContent(atom, dto)) {
                 atom.type(type)
                 break
             }
-        }
-
-        if (dto.text && !atom.type()) {
-            CreativeAtomBasicType.TEXT.strategy.setContent(atom, dto)
         }
         if (dto.title) atom.title = dto.title
 
@@ -64,7 +59,8 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
         new CreativeAtomUpdateBaseDTO(params)
     }
 
+    @Override
     Collection<CreativeAtomType> getAtomTypes() {
-        CreativeAtomBasicType.values()
+        CreativeAtomTypesHolder.types
     }
 }

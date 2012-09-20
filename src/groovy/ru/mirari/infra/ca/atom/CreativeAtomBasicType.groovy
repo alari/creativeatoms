@@ -23,7 +23,7 @@ public enum CreativeAtomBasicType implements CreativeAtomType {
         for (CreativeAtomBasicType t in CreativeAtomBasicType.values()) byName.put(t.name(), t)
     }
 
-    static CreativeAtomBasicType byName(final String typeName) {
+    static CreativeAtomType byName(final String typeName) {
         byName.get(typeName)
     }
 

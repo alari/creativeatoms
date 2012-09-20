@@ -6,7 +6,7 @@ import ru.mirari.infra.ca.face.CreativeAtomContent
 import ru.mirari.infra.ca.face.CreativeAtomRawContent
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
-import ru.mirari.infra.ca.atom.CreativeAtomBasicType
+import ru.mirari.infra.ca.content.CreativeAtomTypesHolder
 
 /**
  * @author alari
@@ -25,7 +25,7 @@ abstract class CreativeAtomBase<C extends CreativeAtomContent, R extends Creativ
 
     @Override
     public CreativeAtomType type() {
-        CreativeAtomBasicType.byName(typeName)
+        CreativeAtomTypesHolder.byName(typeName)
     }
 
     @Override
