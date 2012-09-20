@@ -13,7 +13,7 @@
 
 <body>
 
-<div ng-app="CreativeAtom" ng-controller="CreativeAtomCtr">
+<div ng-app="ca.app" ng-controller="CreativeAtomCtr">
 
     <fieldset>
         <input type="file" name="file" data-url="/rest/creativeAtom" ui-jq="fileupload" ui-options="{dataType:'json',add:pushFile,done:fileDone}" />
@@ -24,7 +24,12 @@
     </fieldset>
 
     <div ng-repeat="atom in atoms">
-        <div ng-include src="'/html/atom/'+atom.type+'.html?13'"></div>
+        <div>
+            <b ng-click="update(atom)">edit me</b>
+        </div>
+        <div ui-if="atom.processUpdate" ng-include src="atomUpdateTemplate(atom)">
+        </div>
+        <div ui-if="!atom.processUpdate" ng-include src="atomTemplate(atom)"></div>
     </div>
 </div>
 

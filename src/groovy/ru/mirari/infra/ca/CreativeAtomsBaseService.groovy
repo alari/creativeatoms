@@ -43,10 +43,14 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
 
     @Override
     boolean update(CreativeAtom atom, CreativeAtomUpdateDTO dto) {
-        if (atom.atomId != dto.id) {
+        if (!atom.atomId.toString().equals(dto.id.toString())) {
             return false
         }
-        atom.type().strategy.setContent(atom, dto)
+        if(atom.type().strategy.setContent(atom, dto)) {
+            atom.title = dto.title
+            return true
+        }
+        false
     }
 
     @Override

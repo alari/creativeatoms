@@ -7,6 +7,7 @@ import ru.mirari.infra.ca.face.CreativeAtomRepo
 import ru.mirari.infra.ca.face.CreativeAtomsService
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
+import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 
 class RestCreativeAtomController {
 
@@ -33,8 +34,8 @@ class RestCreativeAtomController {
         render "error"
     }
 
-    def show(id) {
-        CreativeAtom atom = creativeAtomRepo.get(id)
+    def show() {
+        CreativeAtom atom = creativeAtomRepo.get(params.id)
         if (!atom) {
             response.status = 404
             return;
@@ -48,22 +49,22 @@ class RestCreativeAtomController {
         render dto as JSON
     }
 
-    def update(id) {
-        CreativeAtom atom = creativeAtomRepo.get(id)
+    def save() {
+        CreativeAtom atom = creativeAtomRepo.get(params.id)
         if (!atom) {
             response.status = 404
             return;
         }
-
-        CreativeAtomPushDTO dto = creativeAtomsService.getUpdateDTO(params)
-        if (dto.validate()) {
-            creativeAtomsService.update(atom, dto)
+        CreativeAtomUpdateDTO dto = creativeAtomsService.getUpdateDTO(params)
+        if (creativeAtomsService.update(atom, dto)) {
             render atom.contentDTO as JSON
+        } else {
+            response.status = 400
         }
     }
 
-    def delete(id) {
-        CreativeAtom atom = creativeAtomRepo.get(id)
+    def delete() {
+        CreativeAtom atom = creativeAtomRepo.get(params.id)
         if (!atom) {
             response.status = 404
             return;
