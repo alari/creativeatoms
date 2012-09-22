@@ -49,9 +49,24 @@ exports.CreativeAtomCtr = ($scope, CreativeAtom)->
       atom.$get {id: atom.id, update: true}, ->
         atom.processUpdate = true
 
+  $scope.delete = (atom)->
+    $scope.atoms = $scope.atoms.filter (el)->el.id != atom.id
+    atom.$delete id: atom.id
 
   $scope.atomTemplate = (atom)->
-    '/html/atom/'+atom.type+'.html?15'
+    '/html/atom/'+atom.type+'.html?18'
 
-  $scope.atomUpdateTemplate = (atom)->
-    '/html/atom/'+atom.type+'.update.html?1'
+  $scope.updateFile = (atom)->
+    (o, e)->
+      delete atom.class
+      e.url = "/rest/creativeAtom/"+atom.id
+      e.formData = atom
+      e.submit()
+
+  $scope.updateFileDone = (atom)->
+    (e, data)->
+      $scope.$apply ->
+        atom[k] = v for k,v in data.result if atom[k]
+        (atom.sounds[k] = v+"?"+Math.random()) for k,v in data.result.sounds if data.result.sounds
+        (atom.images[k] = v+"?"+Math.random()) for k,v in data.result.images if data.result.images
+        atom.processUpdate = false

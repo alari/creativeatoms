@@ -1,4 +1,2 @@
-<h1>{{atom.title}}</h1>
-<div ng-bind-html-unsafe="atom.text">
-
-</div>
+<div ui-if="!atom.processUpdate" ng-bind-html-unsafe="atom.text"></div>
+<textarea ui-if="atom.processUpdate" ng-model="atom.text"></textarea>

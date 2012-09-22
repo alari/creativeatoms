@@ -19,6 +19,7 @@ import ru.mirari.infra.text.TextProcessUtil
 class TextContentStrategy extends InternalContentStrategy {
     @Autowired private CreativeAtomRawContentRepo creativeAtomRawContentRepo
     @Autowired private CreativeAtomContentRepo creativeAtomContentRepo
+    @Autowired private TextProcessUtil textProcessUtil
 
     private void initiateContent(CreativeAtom atom) {
         if (!atom.rawContent) {
@@ -39,9 +40,9 @@ class TextContentStrategy extends InternalContentStrategy {
         if (fileInfo.extension.equalsIgnoreCase("txt")) {
             atom.rawContent.text = fileInfo.file.getText()
         } else if (fileInfo.extension in ["htm", "html"]) {
-            atom.rawContent.text = TextProcessUtil.htmlToMarkdown(fileInfo.file.getText())
+            atom.rawContent.text = textProcessUtil.htmlToMarkdown(fileInfo.file.getText())
         }
-        atom.content.text = TextProcessUtil.markdownToHtml(atom.rawContent.text)
+        atom.content.text = textProcessUtil.markdownToHtml(atom.rawContent.text)
     }
 
     @Override
@@ -50,7 +51,7 @@ class TextContentStrategy extends InternalContentStrategy {
         if (dto.text) {
             initiateContent(atom)
             atom.rawContent.text = dto.text
-            atom.content.text = TextProcessUtil.markdownToHtml(atom.rawContent.text)
+            atom.content.text = textProcessUtil.markdownToHtml(atom.rawContent.text)
             return true
         }
         return false

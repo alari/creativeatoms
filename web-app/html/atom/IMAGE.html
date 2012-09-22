@@ -1,2 +1,4 @@
-<h1>{{atom.title}}</h1>
 <img ng-src="{{atom.images['im-standard']}}"/>
+
+<input ui-if="atom.processUpdate" type="file" name="file" ui-jq="fileupload"
+       ui-options="{dataType:'json',add:updateFile(atom),done:updateFileDone(atom)}"/>

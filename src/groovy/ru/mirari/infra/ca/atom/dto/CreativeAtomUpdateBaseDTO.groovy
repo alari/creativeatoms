@@ -4,6 +4,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import grails.validation.Validateable
+import org.codehaus.groovy.runtime.typehandling.GroovyCastException
 
 /**
  * @author alari
@@ -28,8 +29,11 @@ class CreativeAtomUpdateBaseDTO extends CreativeAtomContentBaseDTO implements Cr
         params?.each { String k, v ->
             if(!v) return;
             if (!this.hasProperty(k)) return;
-            if (k == "file" || k == "errors" || k == "class") return;
-            this[k] = v
+            if (k in ['file', 'errors', 'class', 'images', 'sounds']) return;
+            try {
+                this[k] = v
+            } catch (GroovyCastException e) {
+            }
         }
         if (params['file'] instanceof CommonsMultipartFile) {
             CommonsMultipartFile f = (CommonsMultipartFile) params['file']

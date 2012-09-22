@@ -1,7 +1,7 @@
 modules = {
-    application {
+    'ca-core' {
         resource url:'coffee/CreativeAtom.coffee'
-        dependsOn "angular", "angular-ui"
+        dependsOn "angular", "angular-ui", 'jquery-file-upload', 'mediaelementplayer'
     }
 
     'angular-ui'{

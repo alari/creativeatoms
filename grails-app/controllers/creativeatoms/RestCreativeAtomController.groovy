@@ -50,7 +50,7 @@ class RestCreativeAtomController {
     }
 
     def save() {
-        CreativeAtom atom = creativeAtomRepo.get(params.id)
+        CreativeAtom atom = creativeAtomRepo.get(params.long("id"))
         if (!atom) {
             response.status = 404
             return;
@@ -60,6 +60,7 @@ class RestCreativeAtomController {
             render atom.contentDTO as JSON
         } else {
             response.status = 400
+            render "not updated"
         }
     }
 
@@ -67,9 +68,11 @@ class RestCreativeAtomController {
         CreativeAtom atom = creativeAtomRepo.get(params.id)
         if (!atom) {
             response.status = 404
+            render "not found"
             return;
         }
 
         creativeAtomRepo.delete(atom)
+        render "deleted"
     }
 }

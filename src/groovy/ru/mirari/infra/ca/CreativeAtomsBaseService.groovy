@@ -49,6 +49,9 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
         if(atom.type().strategy.setContent(atom, dto)) {
             atom.title = dto.title
             return true
+        } else if(atom.title != dto.title) {
+            atom.title = dto.title
+            return true
         }
         false
     }

@@ -1,0 +1,9 @@
+<h1 ui-if="!atom.processUpdate && atom.title">{{atom.title}}</h1>
+<h1 ui-if="atom.processUpdate"><input type="text" ng-model="atom.title"></h1>
+
+<div ng-include src="atomTemplate(atom)"></div>
+
+<div>
+    <button class="btn btn-info" ng-click="update(atom)">edit me</button>
+    <button class="btn btn-danger" ng-click="delete(atom)">delete</button>
+</div>
