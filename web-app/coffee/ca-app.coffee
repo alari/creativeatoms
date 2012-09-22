@@ -1,27 +1,9 @@
 exports = this
 
-angular.module("ca.ui", ['ui'])
-  .directive "caSound", ->
-    (scope, element, attrs)->
-      element.attr "src", scope.$eval(attrs['caSound'])
-      $(element).mediaelementplayer
-        pluginPath: "/vendor/mediaelement/"
-        src: scope.$eval("atom.sounds['mpeg']")
-  .directive "caRussiaRu", ->
-    (scope, element, attrs)->
-      externalId = scope.$eval(attrs['russiaRu'])
-      $(element).html("<embed name='playerblog#{externalId}'
-                      src='http://www.russia.ru/player/main.swf?103'
-          flashvars='name=#{externalId}&from=blog&blog=true' width='448' height='252'
-          bgcolor='#000000' allowScriptAccess='always' allowFullScreen='true'></embed>")
+angular.module("ca.app", ['ca.CreativeAtom', 'ca.ui', 'ca.base'])
 
-angular.module("ca.CreativeAtom", ['ngResource'])
-  .factory 'CreativeAtom', ($resource)->
-     $resource '/rest/creativeAtom/:id'
 
-angular.module("ca.app", ['ca.CreativeAtom', 'ca.ui'])
-
-exports.CreativeAtomCtr = ($scope, CreativeAtom)->
+exports.CreativeAtomCtr = ($scope, CreativeAtom, caTemplates, caUrls)->
   $scope.atoms = CreativeAtom.query()
 
   $scope.newAtom = new CreativeAtom()
@@ -53,13 +35,12 @@ exports.CreativeAtomCtr = ($scope, CreativeAtom)->
     $scope.atoms = $scope.atoms.filter (el)->el.id != atom.id
     atom.$delete id: atom.id
 
-  $scope.atomTemplate = (atom)->
-    '/html/atom/'+atom.type+'.html?18'
+  $scope.tpls = caTemplates
 
   $scope.updateFile = (atom)->
     (o, e)->
       delete atom.class
-      e.url = "/rest/creativeAtom/"+atom.id
+      e.url = caUrls.restAtom(atom)
       e.formData = atom
       e.submit()
 

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-        <r:require modules="ca-core"/>
+        <r:require modules="ca-app"/>
 	</head>
 	<body>
 

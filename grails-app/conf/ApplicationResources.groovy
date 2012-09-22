@@ -1,7 +1,19 @@
 modules = {
-    'ca-core' {
-        resource url:'coffee/CreativeAtom.coffee'
-        dependsOn "angular", "angular-ui", 'jquery-file-upload', 'mediaelementplayer'
+    'ca-ui' {
+        resource url: 'coffee/ca-ui.coffee'
+        dependsOn "angular", "angular-ui", 'jquery-file-upload', 'mediaelementplayer', 'autoResize', 'ca-base'
+    }
+    'ca-CreativeAtom' {
+        resource url: 'coffee/ca-CreativeAtom.coffee'
+        dependsOn 'angular', 'ca-base'
+    }
+    'ca-app' {
+        resource url:'coffee/ca-app.coffee'
+        dependsOn 'ca-ui', 'ca-CreativeAtom', 'ca-base'
+    }
+    'ca-base' {
+        resource url: 'coffee/ca-base.coffee'
+        dependsOn 'angular'
     }
 
     'angular-ui'{
@@ -22,5 +34,10 @@ modules = {
         resource url: "vendor/mediaelement/mediaelement-and-player.min.js"
         resource url: "vendor/mediaelement/mediaelementplayer.min.css"
         dependsOn "jquery"
+    }
+
+    'autoResize'{
+        resource url: "vendor/autoResize/autoResize.js"
+        dependsOn 'jquery'
     }
 }

@@ -8,6 +8,7 @@ grails.project.source.level = 1.6
 
 grails.plugin.location.'infra-file-storage' = "infra-file-storage"
 grails.plugin.location.'infra-images' = "infra-images"
+grails.plugin.location.'infra-ca' = "infra-ca"
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
