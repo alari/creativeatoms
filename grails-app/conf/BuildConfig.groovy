@@ -6,8 +6,6 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-grails.plugin.location.'infra-file-storage' = "infra-file-storage"
-grails.plugin.location.'infra-images' = "infra-images"
 grails.plugin.location.'infra-ca' = "infra-ca"
 
 grails.project.dependency.resolution = {
@@ -35,16 +33,10 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
 
-        // For pegdown markdown
-        mavenRepo "http://scala-tools.org/repo-releases"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        compile "org.apache.httpcomponents:httpclient:4.2.1"
-
-        compile 'org.pegdown:pegdown:latest.release'
-        compile "org.jsoup:jsoup:latest.release"
 
         // runtime 'mysql:mysql-connector-java:5.1.20'
     }

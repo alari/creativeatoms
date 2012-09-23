@@ -1,8 +1,8 @@
 package ru.mirari.infra.ca.content.external
 
-import ru.mirari.infra.ca.content.CreativeAtomData
 import ru.mirari.infra.ca.content.CreativeAtomStrategy
 import ru.mirari.infra.ca.face.CreativeAtom
+import ru.mirari.infra.ca.content.CreativeAtomData
 
 /**
  * @author alari

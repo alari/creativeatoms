@@ -1,15 +1,17 @@
 package ru.mirari.infra.ca.content
 
 import org.springframework.stereotype.Component
-import ru.mirari.infra.ca.atom.dto.CreativeAtomContentBaseDTO
-import ru.mirari.infra.ca.atom.dto.CreativeAtomUpdateBaseDTO
+
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.file.FileInfo
 import org.springframework.beans.factory.annotation.Autowired
+
 import ru.mirari.infra.ca.face.CreativeAtomRepo
+import ru.mirari.infra.ca.atom.dto.CreativeAtomContentBaseDTO
+import ru.mirari.infra.ca.atom.dto.CreativeAtomUpdateBaseDTO
 
 /**
  * @author alari
@@ -18,6 +20,10 @@ import ru.mirari.infra.ca.face.CreativeAtomRepo
 @Component
 abstract class CreativeAtomStrategy {
     @Autowired CreativeAtomRepo creativeAtomRepo
+
+    String getName() {
+        this.class.name - "ContentStrategy"
+    }
 
     void setContentFile(CreativeAtom atom, FileInfo fileInfo) {}
 

@@ -5,11 +5,12 @@ import org.springframework.stereotype.Component
 import ru.mirari.infra.ca.content.internal.InternalContentStrategy
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.CreativeAtomImageHolder
-import ru.mirari.infra.ca.face.CreativeAtomImageHolderProvider
+
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.file.FileInfo
 import ru.mirari.infra.image.ImageFormat
 import ru.mirari.infra.image.ImageStorageService
+import ru.mirari.infra.ca.face.CreativeAtomImageHolderProvider
 
 /**
  * @author alari

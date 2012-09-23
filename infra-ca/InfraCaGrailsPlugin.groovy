@@ -1,3 +1,6 @@
+import ru.mirari.infra.ApplicationContextHolder
+import ru.mirari.infra.ca.content.CreativeAtomStrategy
+
 class InfraCaGrailsPlugin {
     // the plugin version
     def version = "0.1"
@@ -43,7 +46,9 @@ Brief summary/description of the plugin.
     }
 
     def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
+        applicationContextHolder(ApplicationContextHolder) { bean ->
+            bean.factoryMethod = 'getInstance'
+        }
     }
 
     def doWithDynamicMethods = { ctx ->
@@ -51,6 +56,7 @@ Brief summary/description of the plugin.
     }
 
     def doWithApplicationContext = { applicationContext ->
+        applicationContext.getBeansOfType(CreativeAtomStrategy)
         // TODO Implement post initialization spring config (optional)
     }
 

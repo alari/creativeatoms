@@ -1,9 +1,9 @@
 angular.module("ca.base", [])
   .service "caTemplates", ->
-    @atom = "/html/atom/atom.html"
+    @atom = "/static/html/atom/atom.html"
     @atomType = (atom)->
-      '/html/atom/'+atom.type+'.html?19'
-    @form = "/html/newAtom.html"
+      '/static/html/atom/'+atom.type+'.html?19'
+    @form = "/static/html/newAtom.html"
   .service "caUrls", ->
     @restResource = '/rest/creativeAtom/:id'
     @restAtom = (atom)->

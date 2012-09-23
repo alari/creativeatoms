@@ -1,7 +1,9 @@
 package ru.mirari.infra.ca.face
 
-import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
+
+import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
+import ru.mirari.infra.ca.content.CreativeAtomStrategy
 
 /**
  * @author alari
@@ -13,6 +15,9 @@ public interface CreativeAtom<C extends CreativeAtomContent, R extends CreativeA
     public String getTitle()
 
     public void setTitle(String title)
+
+    //public CreativeAtomStrategy strategy()
+    //public void strategy(CreativeAtomStrategy strategy)
 
     public CreativeAtomType type()
 

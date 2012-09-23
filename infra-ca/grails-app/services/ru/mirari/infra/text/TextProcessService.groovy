@@ -1,4 +1,4 @@
-package ru.mirari.infra
+package ru.mirari.infra.text
 
 import ru.mirari.infra.text.TextProcessUtil
 import ru.mirari.infra.text.TextProcessUtilHandler

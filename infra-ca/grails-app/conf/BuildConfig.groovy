@@ -2,6 +2,9 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 
+grails.plugin.location.'infra-file-storage' = "../infra-file-storage"
+grails.plugin.location.'infra-images' = "../infra-images"
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -19,18 +22,29 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+
+        // For pegdown markdown
+        mavenRepo "http://scala-tools.org/repo-releases"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
+
+        compile "org.apache.httpcomponents:httpclient:4.2.1"
+
+        compile 'org.pegdown:pegdown:latest.release'
+        compile "org.jsoup:jsoup:latest.release"
 
         // runtime 'mysql:mysql-connector-java:5.1.18'
     }
 
     plugins {
         build(":tomcat:$grailsVersion",
-              ":release:2.0.3",
-              ":rest-client-builder:1.0.2") {
+              ":release:2.0.3",) {
             export = false
         }
+
+        runtime ":jquery:latest.integration"
+        compile ":angularjs-resources:latest.integration"
+        compile ":coffeescript-resources:latest.integration"
     }
 }

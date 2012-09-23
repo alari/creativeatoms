@@ -2,9 +2,11 @@ package ru.mirari.infra.ca.content.file
 
 import org.springframework.beans.factory.annotation.Autowired
 import ru.mirari.infra.FileStorageService
+
+import ru.mirari.infra.file.FileHolder
+
 import ru.mirari.infra.ca.content.internal.InternalContentStrategy
 import ru.mirari.infra.ca.face.CreativeAtom
-import ru.mirari.infra.file.FileHolder
 
 /**
  * @author alari

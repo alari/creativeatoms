@@ -1,8 +1,9 @@
 package ru.mirari.infra.ca.atom
 
-import ru.mirari.infra.ApplicationContextHolder
-import ru.mirari.infra.ca.content.CreativeAtomStrategy
 import ru.mirari.infra.ca.face.CreativeAtomType
+
+import ru.mirari.infra.ca.content.CreativeAtomStrategy
+import ru.mirari.infra.ApplicationContextHolder
 
 /**
  * @author alari
