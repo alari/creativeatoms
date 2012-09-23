@@ -24,6 +24,6 @@ class CreativeAtomContentBaseDTO implements CreativeAtomContentDTO {
     CreativeAtomContentBaseDTO(final CreativeAtom atom) {
         id = atom.atomId
         title = atom.title
-        type = atom.type().name
+        type = atom.strategy().name
     }
 }

@@ -15,6 +15,4 @@ public interface CreativeAtomsService<A extends CreativeAtom, C extends Creative
     CreativeAtomPushDTO getPushDTO(Map params)
 
     CreativeAtomUpdateDTO getUpdateDTO(Map params)
-
-    Collection<CreativeAtomType> getAtomTypes()
 }

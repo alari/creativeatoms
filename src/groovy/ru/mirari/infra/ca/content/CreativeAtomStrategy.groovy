@@ -31,6 +31,20 @@ abstract class CreativeAtomStrategy {
 
     abstract boolean isUrlSupported(URL url);
 
+    private String name
+
+    String getName() {
+        if(name == null) {
+            synchronized (this) {
+                if(name == null) {
+                    name = this.class.simpleName - "ContentStrategy"
+                    name = name[0].toLowerCase() + name.substring(1)
+                }
+            }
+        }
+        name
+    }
+
     void deleteContent(CreativeAtom atom) {
         void
     }

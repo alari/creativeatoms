@@ -1,12 +1,12 @@
 package ru.mirari.infra.ca
 
-import ru.mirari.infra.ca.face.CreativeAtomType
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.CreativeAtomContent
 import ru.mirari.infra.ca.face.CreativeAtomRawContent
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
-import ru.mirari.infra.ca.content.CreativeAtomTypesHolder
+import ru.mirari.infra.ca.content.CreativeAtomStrategy
+import ru.mirari.infra.ca.content.CreativeAtomStrategiesHolder
 
 /**
  * @author alari
@@ -24,13 +24,12 @@ abstract class CreativeAtomBase<C extends CreativeAtomContent, R extends Creativ
     }
 
     @Override
-    public CreativeAtomType type() {
-        CreativeAtomTypesHolder.byName(typeName)
+    CreativeAtomStrategy strategy() {
+        CreativeAtomStrategiesHolder.byName(typeName)
     }
 
-    @Override
-    public void type(CreativeAtomType type) {
-        this.typeName = type.name()
+    void strategy(final CreativeAtomStrategy strategy) {
+        this.typeName = strategy.name
     }
 
     @Override
@@ -45,15 +44,15 @@ abstract class CreativeAtomBase<C extends CreativeAtomContent, R extends Creativ
 
     @Override
     CreativeAtomContentDTO getContentDTO() {
-        type().strategy.getContentDTO(this)
+        strategy().getContentDTO(this)
     }
 
     @Override
     CreativeAtomUpdateDTO getUpdateDTO() {
-        type().strategy.getUpdateDTO(this)
+        strategy().getUpdateDTO(this)
     }
 
     def beforeDelete() {
-        type()?.strategy?.deleteContent(this)
+        strategy()?.deleteContent(this)
     }
 }

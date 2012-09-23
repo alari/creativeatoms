@@ -6,7 +6,8 @@ import ru.mirari.infra.ca.atom.dto.CreativeAtomUpdateBaseDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.ca.face.*
-import ru.mirari.infra.ca.content.CreativeAtomTypesHolder
+import ru.mirari.infra.ca.content.CreativeAtomStrategy
+import ru.mirari.infra.ca.content.CreativeAtomStrategiesHolder
 
 /**
  * @author alari
@@ -20,18 +21,22 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
     @Autowired
     CreativeAtomRawContentRepo<R> creativeAtomRawContentRepo
 
+    @Autowired
+    CreativeAtomStrategiesHolder creativeAtomStrategiesHolder
+
     @Override
     A create(CreativeAtomPushDTO dto) {
         A atom = creativeAtomRepo.create()
-        for (CreativeAtomType type in atomTypes) {
-            if (type.strategy.setContent(atom, dto)) {
-                atom.type(type)
+
+        for(CreativeAtomStrategy strategy in creativeAtomStrategiesHolder.strategies.values()) {
+            if (strategy.setContent(atom, dto)) {
+                atom.strategy(strategy)
                 break
             }
         }
         if (dto.title) atom.title = dto.title
 
-        if (!atom.type()) {
+        if (!atom.strategy() || atom.strategy().isEmpty(atom)) {
             creativeAtomRepo.delete(atom)
             atom = null
         } else {
@@ -46,7 +51,7 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
         if (!atom.atomId.toString().equals(dto.id.toString())) {
             return false
         }
-        if(atom.type().strategy.setContent(atom, dto)) {
+        if(atom.strategy().setContent(atom, dto) && !atom.strategy().isEmpty(atom)) {
             atom.title = dto.title
             return true
         } else if(atom.title != dto.title) {
@@ -64,10 +69,5 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
     @Override
     CreativeAtomUpdateDTO getUpdateDTO(Map params) {
         new CreativeAtomUpdateBaseDTO(params)
-    }
-
-    @Override
-    Collection<CreativeAtomType> getAtomTypes() {
-        CreativeAtomTypesHolder.types
     }
 }
