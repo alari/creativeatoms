@@ -7,6 +7,10 @@ modules = {
         resource url: 'coffee/ca-CreativeAtom.coffee'
         dependsOn 'angular', 'ca-base'
     }
+    'ca-CreativeChain' {
+        resource url: 'coffee/ca-CreativeChain.coffee'
+        dependsOn 'angular', 'ca-base'
+    }
     'ca-app' {
         resource url:'coffee/ca-app.coffee'
         dependsOn 'ca-ui', 'ca-CreativeAtom', 'ca-base'

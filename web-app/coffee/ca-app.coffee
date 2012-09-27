@@ -1,6 +1,6 @@
 exports = this
 
-angular.module("ca.app", ['ca.CreativeAtom', 'ca.ui', 'ca.base'])
+angular.module("ca.app", ['ca.CreativeAtom', 'ca.CreativeChain', 'ca.ui', 'ca.base'])
 
 
 exports.CreativeAtomCtr = ($scope, CreativeAtom, caTemplates, caUrls)->

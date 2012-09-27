@@ -8,4 +8,5 @@ angular.module("ca.base", [])
     @restResource = '/rest/creativeAtom/:id'
     @restAtom = (atom)->
       "/rest/creativeAtom/"+atom.id
+    @restChainResource = '/rest/creativeChain/:id'
     @mediaelementPluginPath = "/vendor/mediaelement/"

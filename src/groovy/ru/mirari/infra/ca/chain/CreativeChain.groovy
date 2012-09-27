@@ -15,6 +15,7 @@ public interface CreativeChain<A extends CreativeAtom> {
     List<A> getAtoms()
     void addToAtoms(A atom)
     boolean removeFromAtoms(A atom)
+    void moveAtom(A atom, int index)
 
     CreativeChainDTO getDTO(boolean withAtoms)
 }

@@ -19,4 +19,8 @@ class PostsRepoService implements CreativeChainRepo<Post> {
     Post get(Serializable id) {
         Post.get(id)
     }
+
+    List<Post> list() {
+        Post.list()
+    }
 }
