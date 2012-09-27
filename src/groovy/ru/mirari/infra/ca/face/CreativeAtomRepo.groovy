@@ -4,7 +4,7 @@ package ru.mirari.infra.ca.face
  * @author alari
  * @since 9/1/12 9:23 PM
  */
-public interface CreativeAtomRepo<A extends CreativeAtom> {
+public interface CreativeAtomRepo<A extends CreativeAtom, C extends CreativeAtomContent, R extends CreativeAtomRawContent> {
     A create()
 
     A get(Serializable id)
@@ -12,4 +12,8 @@ public interface CreativeAtomRepo<A extends CreativeAtom> {
     A save(A atom)
 
     void delete(A atom)
+
+    C createContent()
+
+    R createRawContent()
 }

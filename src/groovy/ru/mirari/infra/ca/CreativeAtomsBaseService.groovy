@@ -15,11 +15,7 @@ import ru.mirari.infra.ca.content.CreativeAtomStrategiesHolder
  */
 class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomContent, R extends CreativeAtomRawContent> implements CreativeAtomsService<A, C, R> {
     @Autowired
-    CreativeAtomRepo<A> creativeAtomRepo
-    @Autowired
-    CreativeAtomContentRepo<C> creativeAtomContentRepo
-    @Autowired
-    CreativeAtomRawContentRepo<R> creativeAtomRawContentRepo
+    CreativeAtomRepo<A,C,R> creativeAtomRepo
 
     @Autowired
     CreativeAtomStrategiesHolder creativeAtomStrategiesHolder

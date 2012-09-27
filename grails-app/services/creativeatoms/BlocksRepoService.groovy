@@ -2,7 +2,7 @@ package creativeatoms
 
 import ru.mirari.infra.ca.face.CreativeAtomRepo
 
-class BlocksRepoService implements CreativeAtomRepo<Block> {
+class BlocksRepoService implements CreativeAtomRepo<Block,BlockContent,BlockRawContent> {
 
     List<Block> list() {
         Block.findAll()
@@ -26,5 +26,15 @@ class BlocksRepoService implements CreativeAtomRepo<Block> {
     @Override
     void delete(Block atom) {
         atom.delete()
+    }
+
+    @Override
+    BlockContent createContent() {
+        new BlockContent()
+    }
+
+    @Override
+    BlockRawContent createRawContent() {
+        new BlockRawContent()
     }
 }

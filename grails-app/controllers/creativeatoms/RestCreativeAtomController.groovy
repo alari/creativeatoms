@@ -38,6 +38,7 @@ class RestCreativeAtomController {
         CreativeAtom atom = creativeAtomRepo.get(params.id)
         if (!atom) {
             response.status = 404
+            render "not found"
             return;
         }
         CreativeAtomContentDTO dto
@@ -53,6 +54,7 @@ class RestCreativeAtomController {
         CreativeAtom atom = creativeAtomRepo.get(params.long("id"))
         if (!atom) {
             response.status = 404
+            render "not found"
             return;
         }
         CreativeAtomUpdateDTO dto = creativeAtomsService.getUpdateDTO(params)

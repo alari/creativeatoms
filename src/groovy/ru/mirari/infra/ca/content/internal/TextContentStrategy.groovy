@@ -3,13 +3,12 @@ package ru.mirari.infra.ca.content.internal
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.mirari.infra.ca.face.CreativeAtom
-import ru.mirari.infra.ca.face.CreativeAtomContentRepo
-import ru.mirari.infra.ca.face.CreativeAtomRawContentRepo
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.file.FileInfo
 import ru.mirari.infra.text.TextProcessUtil
+import ru.mirari.infra.ca.face.CreativeAtomRepo
 
 /**
  * @author alari
@@ -17,16 +16,15 @@ import ru.mirari.infra.text.TextProcessUtil
  */
 @Component
 class TextContentStrategy extends InternalContentStrategy {
-    @Autowired private CreativeAtomRawContentRepo creativeAtomRawContentRepo
-    @Autowired private CreativeAtomContentRepo creativeAtomContentRepo
     @Autowired private TextProcessUtil textProcessUtil
+    @Autowired private CreativeAtomRepo creativeAtomRepo
 
     private void initiateContent(CreativeAtom atom) {
         if (!atom.rawContent) {
-            atom.rawContent = creativeAtomRawContentRepo.create()
+            atom.rawContent = creativeAtomRepo.createRawContent()
         }
         if (!atom.content) {
-            atom.content = creativeAtomContentRepo.create()
+            atom.content = creativeAtomRepo.createContent()
         }
     }
 
