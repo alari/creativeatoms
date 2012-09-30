@@ -13,11 +13,16 @@ modules = {
     }
     'ca-app' {
         resource url:'coffee/ca-app.coffee'
-        dependsOn 'ca-ui', 'ca-CreativeAtom', 'ca-base'
+        dependsOn 'ca-ui', 'ca-CreativeAtom', 'ca-CreativeChain', 'ca-base'
     }
     'ca-base' {
         resource url: 'coffee/ca-base.coffee'
         dependsOn 'angular'
+    }
+
+    'custom-bootstrap' {
+        dependsOn 'bootstrap'
+        resource url:[dir: 'less', file: 'variables.less'], attrs:[rel: "stylesheet/less", type:'css']
     }
 
     'angular-ui'{

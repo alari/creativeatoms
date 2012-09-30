@@ -15,6 +15,7 @@ grails.project.dependency.resolution = {
     inherits("global") {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
         // excludes 'ehcache'
+        excludes 'svn'
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
@@ -62,6 +63,8 @@ grails.project.dependency.resolution = {
         compile ":twitter-bootstrap:latest.integration"
         compile ":angularjs-resources:latest.integration"
         compile ":coffeescript-resources:latest.integration"
+
+        compile ":less-resources:latest.integration"
 
         build ":tomcat:$grailsVersion"
 

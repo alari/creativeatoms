@@ -1,9 +1,8 @@
-<div class="container">
+<div ng-controller="AtomQueryCtr">
 
-    <div class="row" ng-include src="tpls.form">
+    <div class="row" ng-include src="tpls.form" ng-controller="NewAtomCtr">
     </div>
 
-    <div class="row well" ng-repeat="atom in atoms" ng-include src="tpls.atom">
+    <div class="row" ng-repeat="atom in atoms" ng-include src="tpls.atom">
     </div>
-
 </div>
