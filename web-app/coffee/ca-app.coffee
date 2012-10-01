@@ -46,7 +46,7 @@ angular.module("ca.app", ['ca.CreativeAtom', 'ca.CreativeChain', 'ca.ui', 'ca.ba
 
   $scope.fileDone = (e, data)->
     $scope.$apply ->
-      $scope.atoms.unshift data.result if data.result.type
+      $scope.atoms.unshift new CreativeAtom(data.result) if data.result.type
       $scope.newAtom = new CreativeAtom()
 
 

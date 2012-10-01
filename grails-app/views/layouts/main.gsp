@@ -16,7 +16,7 @@
         <div class="navbar-inner">
             <a class="brand" href="/">Mirari</a>
             <ul class="nav">
-                <li ng-repeat="pile in corePiles"><a ng-href="{{pile.title}}">{{pile.title}}</a></li>
+                <li><a ng-href="/">root pile is static</a></li>
             </ul>
         </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="span10 offset2">
             <ul class="breadcrumb">
-                <li ng-repeat="step in steps">{{step}}</li>
+                <li ng-repeat="step in steps"><a href="#">{{step}}</a></li>
             </ul>
         </div>
     </div>
@@ -33,12 +33,12 @@
         <div class="span2">
             <div>
                 <ul class="nav nav-tabs nav-stacked">
-                    <li ng-repeat="pile in relatedPiles">{{pile}}</li>
+                    <li ng-repeat="pile in relatedPiles"><a href="#">{{pile}}</a></li>
                 </ul>
             </div>
-            <div class="well">
+            <div>
                 <ul class="nav nav-list">
-                    <li ng-repeat="nav in relatedNav">{{nav}}</li>
+                    <li ng-repeat="nav in relatedNav"><a href="#">{{nav}}</a></li>
                 </ul>
             </div>
         </div>
@@ -50,7 +50,7 @@
     <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav">
-                <li ng-repeat="site in relatedSites"><a ng-href="{{site.title}}">{{site.title}}</a></li>
+                <li><a href="/">related site static</a></li>
             </ul>
         </div>
     </div>
