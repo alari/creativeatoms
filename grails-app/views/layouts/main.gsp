@@ -22,36 +22,8 @@
     </div>
 
     <div class="row">
-        <div class="span10 offset2">
-            <ul class="breadcrumb">
-                <li ng-repeat="step in steps"><a href="#">{{step}}</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="span2">
-            <div>
-                <ul class="nav nav-tabs nav-stacked">
-                    <li ng-repeat="pile in relatedPiles"><a href="#">{{pile}}</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul class="nav nav-list">
-                    <li ng-repeat="nav in relatedNav"><a href="#">{{nav}}</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="span10">
+        <div class="span12">
             <g:layoutBody/>
-        </div>
-    </div>
-
-    <div class="navbar">
-        <div class="navbar-inner">
-            <ul class="nav">
-                <li><a href="/">related site static</a></li>
-            </ul>
         </div>
     </div>
 </div>

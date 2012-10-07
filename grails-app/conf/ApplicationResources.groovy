@@ -20,11 +20,17 @@ modules = {
         dependsOn 'angular'
     }
 
+    /**
+     * STYLE OVERRIDES
+     */
     'custom-bootstrap' {
         dependsOn 'bootstrap'
         resource url:[dir: 'less', file: 'variables.less'], attrs:[rel: "stylesheet/less", type:'css']
     }
 
+    /**
+     * VENDORS RESOURCES
+     */
     'angular-ui'{
         resource url:'vendor/angular-ui/angular-ui.min.js'
         resource url:'vendor/angular-ui/angular-ui.min.css'

@@ -1,3 +1,10 @@
-angular.module("ca.CreativeChain", ["ngResource", "ca.base"])
-  .factory 'CreativeChain', ($resource, caUrls)->
-    $resource caUrls.restChainResource
+m = angular.module("ca.CreativeChain", ["ngResource", "ca.base"])
+
+m.factory 'CreativeChain', ($resource, caUrls)->
+  $resource caUrls.restChainResource
+
+# Single chain controller
+m.controller 'ChainCtr', ($scope)->
+
+  # Chains query controller
+m.controller 'ChainQueryCtr', ($scope)->
