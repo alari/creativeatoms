@@ -10,6 +10,8 @@ class Post implements CreativeChain<Block> {
 
     List<Block> atoms = []
 
+    boolean draft
+
     static hasMany = [atoms:Block]
 
     static constraints = {
@@ -49,6 +51,10 @@ class Post implements CreativeChain<Block> {
     @Override
     def getChainId() {
         id
+    }
+
+    boolean isDraft() {
+        draft
     }
 }
 

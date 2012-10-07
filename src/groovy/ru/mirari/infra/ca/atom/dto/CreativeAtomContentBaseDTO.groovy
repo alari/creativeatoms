@@ -8,7 +8,8 @@ import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
  * @since 9/2/12 1:50 AM
  */
 class CreativeAtomContentBaseDTO implements CreativeAtomContentDTO {
-    def id
+    String id
+    String chainId
 
     String title
     String type
@@ -23,6 +24,7 @@ class CreativeAtomContentBaseDTO implements CreativeAtomContentDTO {
 
     CreativeAtomContentBaseDTO(final CreativeAtom atom) {
         id = atom.atomId
+        chainId = atom.chainId
         title = atom.title
         type = atom.strategy().name
     }

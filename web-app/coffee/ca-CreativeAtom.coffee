@@ -33,3 +33,35 @@ m.controller "AtomCtr", ['$scope', 'CreativeAtom', 'caUrls', '$rootScope', ($sco
         atom.processUpdate = false
 ]
 
+#new atom form handler
+m.controller "NewAtomCtr", ['$scope', 'CreativeAtom', ($scope, CreativeAtom)->
+  renewAtom = ->
+    $scope.newAtom = new CreativeAtom()
+    $scope.newAtom.chainId = $scope?.chain?.id
+
+  pushAtom = (atom)->
+    $scope.atoms.unshift atom if atom.type
+
+  renewAtom()
+
+  $scope.push = ->
+    $scope.newAtom.$save ->
+      pushAtom($scope.newAtom)
+      renewAtom()
+
+  $scope.pushFile = (o, e)->
+    e.formData = $scope.newAtom
+    e.submit()
+
+  $scope.fileDone = (e, data)->
+    $scope.$apply ->
+      pushAtom(new CreativeAtom(data.result))
+      renewAtom()
+
+
+]
+
+#queried atoms controller
+m.controller("AtomQueryCtr", ['$scope', 'CreativeAtom', ($scope, CreativeAtom)->
+  $scope.atoms = CreativeAtom.query(chainId: $scope?.chain?.id)
+])

@@ -28,29 +28,3 @@ m.controller "LayoutCtr", ['$scope', '$rootScope', 'caTemplates', ($scope, $root
 
 
 ]
-
-#new atom form handler
-m.controller "NewAtomCtr", ['$scope', 'CreativeAtom', ($scope, CreativeAtom)->
-  $scope.newAtom = new CreativeAtom()
-
-  $scope.push = ->
-    $scope.newAtom.$save ->
-      $scope.atoms.unshift $scope.newAtom if $scope.newAtom.type
-      $scope.newAtom = new CreativeAtom()
-
-  $scope.pushFile = (o, e)->
-    e.formData = $scope.newAtom
-    e.submit()
-
-  $scope.fileDone = (e, data)->
-    $scope.$apply ->
-      $scope.atoms.unshift new CreativeAtom(data.result) if data.result.type
-      $scope.newAtom = new CreativeAtom()
-
-
-]
-
-#queried atoms controller
-m.controller("AtomQueryCtr", ['$scope', 'CreativeAtom', ($scope, CreativeAtom)->
-  $scope.atoms = CreativeAtom.query()
-])

@@ -3,7 +3,7 @@ angular.module("ca.base", [])
     @atom = "/html/atom/atom.html"
     @atomType = (atom)->
       '/html/atom/'+atom.type+'.html'
-    @form = "/html/newAtom.html"
+    @form = "/html/atom/atomNew.html"
   .service "caUrls", ->
     @restResource = '/rest/creativeAtom/:id'
     @restAtom = (atom)->

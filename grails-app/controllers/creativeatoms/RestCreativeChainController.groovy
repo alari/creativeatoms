@@ -4,9 +4,11 @@ import ru.mirari.infra.ca.chain.CreativeChainRepo
 import grails.converters.JSON
 import ru.mirari.infra.ca.chain.CreativeChainDTO
 import ru.mirari.infra.ca.chain.CreativeChain
+import org.springframework.beans.factory.annotation.Autowired
 
 class RestCreativeChainController {
 
+    @Autowired
     CreativeChainRepo creativeChainRepo
 
     def query() {
@@ -14,17 +16,16 @@ class RestCreativeChainController {
     }
 
     def create() {
-        /*CreativeChainDTO dto = creativeAtomsService.getPushDTO(params)
-
-        if (dto.validate()) {
-            CreativeChain atom = creativeAtomsService.create(dto)
-            if (atom) {
-                render atom.contentDTO as JSON
-                return;
-            }
+        CreativeChain chain = creativeChainRepo.create()
+        chain.title = ""
+        chain.draft = true
+        if (chain.validate()) {
+            chain.save()
+        } else {
+            println chain.errors
         }
-        response.status = 400
-        render "error" */
+
+        render chain.getDTO(true) as JSON
     }
 
     def show() {

@@ -14,4 +14,6 @@ public interface CreativeAtomPushDTO {
     public String getOriginalFilename()
 
     public String getText()
+
+    public String getChainId()
 }

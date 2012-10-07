@@ -12,6 +12,9 @@ public interface CreativeChain<A extends CreativeAtom> {
     void setTitle(String title)
     String getTitle()
 
+    boolean isDraft()
+    void setDraft(boolean draft)
+
     List<A> getAtoms()
     void addToAtoms(A atom)
     boolean removeFromAtoms(A atom)

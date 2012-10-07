@@ -10,6 +10,8 @@ import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
  */
 @Validateable
 class CreativeAtomPushBaseDTO implements CreativeAtomPushDTO {
+    String chainId
+
     String title
     String externalUrl
 

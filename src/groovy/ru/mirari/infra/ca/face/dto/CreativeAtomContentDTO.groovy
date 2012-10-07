@@ -5,7 +5,8 @@ package ru.mirari.infra.ca.face.dto
  * @since 9/8/12 2:04 PM
  */
 public interface CreativeAtomContentDTO {
-    def id
+    String id
+    String chainId
 
     String title
     String type
