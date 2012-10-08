@@ -1,15 +1,16 @@
-package ru.mirari.infra.ca.atom.dto
+package ru.mirari.infra.ca.dto
 
 import grails.validation.Validateable
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
+import ru.mirari.infra.chain.face.CreativeChainablePushDTO
 
 /**
  * @author alari
  * @since 9/1/12 10:10 PM
  */
 @Validateable
-class CreativeAtomPushBaseDTO implements CreativeAtomPushDTO {
+class CreativeAtomPushBaseDTO implements CreativeAtomPushDTO, CreativeChainablePushDTO {
     String chainId
 
     String title

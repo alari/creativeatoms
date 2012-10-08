@@ -2,24 +2,8 @@
 
     <button class="btn btn-large" ng-click="createChain()">create chain</button>
 
-    <div class="ca-chain" ng-repeat="chain in chains">
-
-        test
-        {{chain.id}}
-
-        <button class="btn btn-small" ng-click="update(chain)">update</button>
-
-        <div ng-include src="'/html/atom/atomQuery.html'"></div>
-
-        <div ui-if="chain.processUpdate">
-            <div ng-include src="'/html/atom/atomNew.html'"></div>
-        </div>
+    <div ng-repeat="chain in chains">
+        <div ng-include src="'/html/chain/chain.html'"></div>
     </div>
 
 </div>
-        <style type="text/css">
-            .ca-chain {
-                margin:10px;
-                border:1px solid red;
-            }
-        </style>

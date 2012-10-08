@@ -1,13 +1,16 @@
 package ru.mirari.infra.ca
 
 import org.springframework.beans.factory.annotation.Autowired
-import ru.mirari.infra.ca.atom.dto.CreativeAtomPushBaseDTO
-import ru.mirari.infra.ca.atom.dto.CreativeAtomUpdateBaseDTO
+import ru.mirari.infra.ca.dto.CreativeAtomPushBaseDTO
+import ru.mirari.infra.ca.dto.CreativeAtomUpdateBaseDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.ca.face.*
 import ru.mirari.infra.ca.content.CreativeAtomStrategy
 import ru.mirari.infra.ca.content.CreativeAtomStrategiesHolder
+import ru.mirari.infra.chain.face.CreativeChainable
+import ru.mirari.infra.chain.face.CreativeChainablePushDTO
+import ru.mirari.infra.chain.face.CreativeChainService
 
 /**
  * @author alari
@@ -19,6 +22,9 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
 
     @Autowired
     CreativeAtomStrategiesHolder creativeAtomStrategiesHolder
+
+    @Autowired
+    CreativeChainService creativeChainService
 
     @Override
     A create(CreativeAtomPushDTO dto) {
@@ -36,6 +42,9 @@ class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomCon
             creativeAtomRepo.delete(atom)
             atom = null
         } else {
+            if (creativeChainService && atom instanceof CreativeChainable && dto instanceof CreativeChainablePushDTO) {
+                creativeChainService.setChain((CreativeChainable)atom, (CreativeChainablePushDTO)dto)
+            }
             creativeAtomRepo.save(atom)
         }
 

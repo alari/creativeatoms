@@ -1,0 +1,23 @@
+<div ng-controller="ChainCtr" class="ca-chain" ui-if="chain.id">
+    <h2 ui-if="!chain.processUpdate">{{chain.title}}</h2>
+    <input type="text" ng-model="chain.title" ui-if="chain.processUpdate"/>
+
+    <button class="btn btn-small" ng-click="update()">update</button>
+    <button class="btn btn-small" ng-click="delete()">delete</button>
+
+    <div ng-include src="'/html/atom/atomQuery.html'"></div>
+
+
+    <button class="btn btn-small" ng-click="pushAtom()">push atom</button>
+    <div ui-if="chain.processPushAtom">
+        <div ng-include src="'/html/atom/atomNew.html'"></div>
+    </div>
+
+</div>
+
+<style type="text/css">
+    .ca-chain {
+        margin: 10px;
+        border: 1px solid red;
+    }
+</style>

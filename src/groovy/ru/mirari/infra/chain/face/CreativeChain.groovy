@@ -1,12 +1,10 @@
-package ru.mirari.infra.ca.chain
-
-import ru.mirari.infra.ca.face.CreativeAtom
+package ru.mirari.infra.chain.face
 
 /**
  * @author alari
  * @since 9/27/12 9:46 PM
  */
-public interface CreativeChain<A extends CreativeAtom> {
+public interface CreativeChain<A extends CreativeChainable> {
     def getChainId()
 
     void setTitle(String title)

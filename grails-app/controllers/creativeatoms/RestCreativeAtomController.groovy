@@ -8,6 +8,9 @@ import ru.mirari.infra.ca.face.CreativeAtomsService
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
+import ru.mirari.infra.chain.face.CreativeChainable
+import ru.mirari.infra.chain.face.CreativeChainService
+import ru.mirari.infra.chain.face.CreativeChainablePushDTO
 
 class RestCreativeAtomController {
 

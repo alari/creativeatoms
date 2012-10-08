@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.atom.dto
+package ru.mirari.infra.ca.dto
 
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
@@ -9,7 +9,6 @@ import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
  */
 class CreativeAtomContentBaseDTO implements CreativeAtomContentDTO {
     String id
-    String chainId
 
     String title
     String type
@@ -24,7 +23,6 @@ class CreativeAtomContentBaseDTO implements CreativeAtomContentDTO {
 
     CreativeAtomContentBaseDTO(final CreativeAtom atom) {
         id = atom.atomId
-        chainId = atom.chainId
         title = atom.title
         type = atom.strategy().name
     }

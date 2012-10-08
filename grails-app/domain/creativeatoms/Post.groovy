@@ -1,8 +1,8 @@
 package creativeatoms
 
-import ru.mirari.infra.ca.chain.CreativeChain
-import ru.mirari.infra.ca.chain.CreativeChainDTO
-import ru.mirari.infra.ca.chain.CreativeChainBaseDTO
+import ru.mirari.infra.chain.face.CreativeChain
+import ru.mirari.infra.chain.face.CreativeChainDTO
+import ru.mirari.infra.chain.CreativeChainBaseDTO
 
 class Post implements CreativeChain<Block> {
 
@@ -20,6 +20,7 @@ class Post implements CreativeChain<Block> {
     @Override
     void addToAtoms(Block atom) {
         atoms.add(atom)
+        atom.chain = this
     }
 
     @Override

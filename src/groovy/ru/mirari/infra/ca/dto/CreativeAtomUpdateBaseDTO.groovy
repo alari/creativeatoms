@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.atom.dto
+package ru.mirari.infra.ca.dto
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import ru.mirari.infra.ca.face.CreativeAtom
@@ -20,6 +20,7 @@ class CreativeAtomUpdateBaseDTO extends CreativeAtomContentBaseDTO implements Cr
 
     }
 
+    String chainId
     String externalUrl
     File file
     String originalFilename

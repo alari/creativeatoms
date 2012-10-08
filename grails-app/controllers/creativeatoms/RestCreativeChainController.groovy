@@ -1,9 +1,9 @@
 package creativeatoms
 
-import ru.mirari.infra.ca.chain.CreativeChainRepo
+import ru.mirari.infra.chain.face.CreativeChainRepo
 import grails.converters.JSON
-import ru.mirari.infra.ca.chain.CreativeChainDTO
-import ru.mirari.infra.ca.chain.CreativeChain
+
+import ru.mirari.infra.chain.face.CreativeChain
 import org.springframework.beans.factory.annotation.Autowired
 
 class RestCreativeChainController {
@@ -12,6 +12,7 @@ class RestCreativeChainController {
     CreativeChainRepo creativeChainRepo
 
     def query() {
+        // TODO: remove this shit
         render creativeChainRepo.list()*.getDTO(true) as JSON
     }
 
@@ -22,53 +23,47 @@ class RestCreativeChainController {
         if (chain.validate()) {
             chain.save()
         } else {
-            println chain.errors
+            response.status = 400
+            render "not ok"
+            return;
         }
 
         render chain.getDTO(true) as JSON
     }
 
     def show() {
-        /*CreativeAtom atom = creativeAtomRepo.get(params.id)
-        if (!atom) {
+        CreativeChain chain = creativeChainRepo.get(params.long("id"))
+        if (!chain) {
             response.status = 404
             render "not found"
             return;
         }
-        CreativeAtomContentDTO dto
-        if (params.update) {
-            dto = atom.updateDTO
-        } else {
-            dto = atom.contentDTO
-        }
-        render dto as JSON   */
+        render chain.getDTO(true) as JSON
     }
 
     def save() {
-        /*CreativeAtom atom = creativeAtomRepo.get(params.long("id"))
-        if (!atom) {
+        CreativeChain chain = creativeChainRepo.get(params.long("id"))
+        if (!chain) {
             response.status = 404
             render "not found"
             return;
         }
-        CreativeAtomUpdateDTO dto = creativeAtomsService.getUpdateDTO(params)
-        if (creativeAtomsService.update(atom, dto)) {
-            render atom.contentDTO as JSON
-        } else {
-            response.status = 400
-            render "not updated"
-        } */
+        chain.title = params.title
+        chain.draft = params.boolean("draft")
+
+        creativeChainRepo.save(chain)
+
+        render chain.getDTO(false) as JSON
     }
 
     def delete() {
-        /*CreativeAtom atom = creativeAtomRepo.get(params.id)
-        if (!atom) {
+        CreativeChain chain = creativeChainRepo.get(params.long("id"))
+        if (!chain) {
             response.status = 404
             render "not found"
             return;
         }
-
-        creativeAtomRepo.delete(atom)
-        render "deleted"*/
+        creativeChainRepo.delete(chain)
+        render "deleted"
     }
 }

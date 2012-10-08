@@ -5,7 +5,8 @@ m.factory 'CreativeAtom', ($resource, caUrls)->
 
 #single atom render controller
 m.controller "AtomCtr", ['$scope', 'CreativeAtom', 'caUrls', '$rootScope', ($scope, CreativeAtom, caUrls, $rootScope)->
-  $scope.update = (atom)->
+  atom = new CreativeAtom($scope.atom)
+  $scope.update = ->
     if(atom.processUpdate)
       delete atom.class
       atom.$save {id: atom.id}, atom, ->
@@ -14,17 +15,18 @@ m.controller "AtomCtr", ['$scope', 'CreativeAtom', 'caUrls', '$rootScope', ($sco
       atom.$get {id: atom.id, update: true}, ->
         atom.processUpdate = true
 
-  $scope.delete = (atom)->
-    atom.$delete id: atom.id
+  $scope.delete = ->
+    atom.$delete id: atom.id, ->
+      $scope.atom.id = null
 
-  $scope.updateFile = (atom)->
+  $scope.updateFile = ->
     (o, e)->
       delete atom.class
       e.url = caUrls.restAtom(atom)
       e.formData = atom
       e.submit()
 
-  $scope.updateFileDone = (atom)->
+  $scope.updateFileDone = ->
     (e, data)->
       $scope.$apply ->
         atom[k] = v for k,v in data.result if atom[k]
@@ -37,10 +39,10 @@ m.controller "AtomCtr", ['$scope', 'CreativeAtom', 'caUrls', '$rootScope', ($sco
 m.controller "NewAtomCtr", ['$scope', 'CreativeAtom', ($scope, CreativeAtom)->
   renewAtom = ->
     $scope.newAtom = new CreativeAtom()
-    $scope.newAtom.chainId = $scope?.chain?.id
+    $scope.newAtom.chainId = $scope.chain?.id
 
   pushAtom = (atom)->
-    $scope.atoms.unshift atom if atom.type
+    ($scope.atoms || $scope.chain.atoms).push atom if atom.type
 
   renewAtom()
 
@@ -63,5 +65,5 @@ m.controller "NewAtomCtr", ['$scope', 'CreativeAtom', ($scope, CreativeAtom)->
 
 #queried atoms controller
 m.controller("AtomQueryCtr", ['$scope', 'CreativeAtom', ($scope, CreativeAtom)->
-  $scope.atoms = CreativeAtom.query(chainId: $scope?.chain?.id)
+  $scope.atoms = $scope.chain.atoms || []
 ])

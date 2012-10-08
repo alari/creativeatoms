@@ -2,7 +2,9 @@ package creativeatoms
 
 import ru.mirari.infra.ca.CreativeAtomBase
 
-class Block extends CreativeAtomBase<BlockContent, BlockRawContent> {
+import ru.mirari.infra.chain.face.CreativeChainable
+
+class Block extends CreativeAtomBase<BlockContent, BlockRawContent> implements CreativeChainable<Post> {
     private BlockContent content
     private BlockRawContent rawContent
 
@@ -12,6 +14,7 @@ class Block extends CreativeAtomBase<BlockContent, BlockRawContent> {
     }
 
     static hasOne = [content: BlockContent, rawContent: BlockRawContent]
+    static belongsTo = [chain:Post]
 
     @Override
     void setContent(BlockContent content) {

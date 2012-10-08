@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.chain
+package ru.mirari.infra.chain.face
 
 /**
  * @author alari

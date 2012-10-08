@@ -1,4 +1,4 @@
-package ru.mirari.infra.ca.chain
+package ru.mirari.infra.chain.face
 
 /**
  * @author alari
@@ -8,4 +8,5 @@ public interface CreativeChainRepo<C extends CreativeChain> {
     C create()
     void delete(C chain)
     C get(Serializable id)
+    void save(C chain)
 }
