@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>{{title}}<g:layoutTitle/></title>
-    <r:require modules="custom-bootstrap,ca-app,angular-bootstrap"/>
+    <r:require modules="custom-bootstrap,ca-app,angular-bootstrap,bootstrap-modal"/>
     <g:layoutHead/>
     <r:layoutResources/>
 </head>
@@ -18,6 +18,16 @@
             <ul class="nav">
                 <li><a ng-href="/">root pile is static</a></li>
             </ul>
+            <span ng-controller="AuthCtr">
+                <ul class="nav">
+                    <li ui-if="!isAuthenticated"><a data-toggle="modal" href="#regModal">Sign Up!</a></li>
+                    <li ui-if="!isAuthenticated"><a data-toggle="modal" href="#signInModal">Sign In!</a></li>
+                    <li ui-if="isAuthenticated"><a ng-click="logout()">logout</a></li>
+                </ul>
+
+                <div ui-if="!isAuthenticated" ng-include src="'/html/auth/reg.html'"></div>
+                <div ui-if="!isAuthenticated" ng-include src="'/html/auth/signIn.html'"></div>
+            </span>
         </div>
     </div>
 

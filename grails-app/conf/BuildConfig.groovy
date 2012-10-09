@@ -66,6 +66,10 @@ grails.project.dependency.resolution = {
 
         compile ":less-resources:latest.integration"
 
+
+        compile ":shiro:latest.integration"
+
+
         build ":tomcat:$grailsVersion"
 
         runtime ":database-migration:1.1"
