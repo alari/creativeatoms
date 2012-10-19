@@ -13,7 +13,7 @@ class AuthApiController {
     def shiroSecurityService
 
     def checkAuth() {
-        render([isAuthenticated: SecurityUtils.subject.isAuthenticated()] as grails.converters.JSON)
+        render(authStatus as JSON)
     }
 
     def signIn() {
@@ -34,13 +34,11 @@ class AuthApiController {
             checkAuth()
         }
         catch (AuthenticationException ex) {
-            Map err = [error: message(code: "login.failed")]
-
-            render err as JSON
+            render getAuthStatus(error: message(code: "login.failed")) as JSON
         }
     }
 
-    def register() {
+    def signUp() {
         String username = request.JSON.username
         String password = request.JSON.password
         User user = new User(username: username, passwordHash: shiroSecurityService.encodePassword(password, username))
@@ -53,9 +51,9 @@ class AuthApiController {
                 println e
             }
         } else {
-            println user.errors
+            render getAuthStatus(errors: user.errors.allErrors*.toString()) as JSON
         }
-        render SecurityUtils.subject as JSON
+        checkAuth()
     }
 
     def signOut() {
@@ -65,6 +63,15 @@ class AuthApiController {
 
         ConfigUtils.removePrincipal(principal)
 
-        render SecurityUtils.subject as JSON
+        checkAuth()
+    }
+
+    private Map<String, ?> getAuthStatus(Map<String, ?> additional = null) {
+        Map<String, ?> m = [
+                isAuthenticated: SecurityUtils.subject.isAuthenticated(),
+                username: SecurityUtils.subject?.principal
+        ]
+        if (additional) m.putAll(additional)
+        m
     }
 }

@@ -20,12 +20,13 @@
             </ul>
             <span ng-controller="AuthCtr">
                 <ul class="nav">
-                    <li ui-if="!isAuthenticated"><a data-toggle="modal" href="#regModal">Sign Up!</a></li>
-                    <li ui-if="!isAuthenticated"><a data-toggle="modal" href="#signInModal">Sign In!</a></li>
-                    <li ui-if="isAuthenticated"><a ng-click="logout()">logout</a></li>
+                    <li ui-if="!isAuthenticated"><a data-toggle="modal" href="#regModal">Регистрация</a></li>
+                    <li ui-if="!isAuthenticated"><a data-toggle="modal" href="#signInModal">Вход</a></li>
+                    <li ui-if="isAuthenticated"><a ng-click="signOut()">Выйти</a></li>
                 </ul>
 
-                <div ui-if="!isAuthenticated" ng-include src="'/html/auth/reg.html'"></div>
+                <div ui-if="!isAuthenticated" ng-include src="'/html/auth/signUp.html'"></div>
+
                 <div ui-if="!isAuthenticated" ng-include src="'/html/auth/signIn.html'"></div>
             </span>
         </div>

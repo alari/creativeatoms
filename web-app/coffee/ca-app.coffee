@@ -19,29 +19,33 @@ m.controller "LayoutCtr", ['$scope', '$rootScope', 'caTemplates', ($scope, $root
   $scope.tpls = caTemplates
 ]
 
+# Authentication bean
 m.service "authService", ($http)->
   @isAuthenticated = false
+  @username = null
 
-  @checkAuth = (callback)->
+  @respond = (data, callback)=>
+    @isAuthenticated = data.isAuthenticated
+    @username = data.username
+    callback(data) if callback
+
+  @checkAuth = (callback)=>
     $http.get("/authApi/checkAuth").success (data)=>
-      @isAuthenticated = data.isAuthenticated
-      callback() if callback
+      @respond(data, callback)
 
-  @register = (login, password)->
-    $http.post("/authApi/register", {username: login, password: password}).success (data)->
-      console.log data
+  @signUp = (credentials, callback)=>
+    $http.post("/authApi/signUp", credentials).success (data)->
+      @respond(data, callback)
 
-  @signOut = (callback)->
+  @signOut = (callback)=>
     $http.post("/authApi/signOut").success (data)=>
-      @isAuthenticated = false
-      callback() if callback
+      @respond(data, callback)
 
-  @signIn = (data, callback)->
-    $http.post("/authApi/signIn", {username: data.username, password: data.password, rememberMe: data.rememberMe}).success (r)=>
-      @isAuthenticated = r.isAuthenticated
-      callback(r) if callback
+  @signIn = (credentials, callback)=>
+    $http.post("/authApi/signIn", credentials).success (data)=>
+      @respond(data, callback)
 
-
+# Auth control basics
 m.controller "AuthCtr", ['$scope', '$rootScope', 'authService', ($scope, $rootScope, authService)->
   $scope.isAuthenticated = false
 
@@ -49,17 +53,21 @@ m.controller "AuthCtr", ['$scope', '$rootScope', 'authService', ($scope, $rootSc
     $scope.isAuthenticated = authService.isAuthenticated
 
   $scope.signOut = ->
-    authService.signOut ->
-      $scope.isAuthenticated = false
+    authService.signOut (data)->
+      if(!data.isAuthenticated)
+        window.location.reload()
 ]
 
-m.controller "RegisterCtr", ['$scope', 'authService', ($scope, authService)->
-  $scope.register = ->
-    authService.register($scope.username, $scope.password)
+# Sign upper / registration controller
+m.controller "SignUpCtr", ['$scope', 'authService', ($scope, authService)->
+  $scope.signUp = ->
+    authService.signUp {username: $scope.username, password: $scope.password}, (data)->
+      window.location.reload()
 ]
 
+# Sign in controller
 m.controller "SignInCtr", ['$scope', 'authService', ($scope, authService)->
   $scope.signIn = ->
-    authService.signIn $scope, (data)->
-      console.log data
+    authService.signIn {username: $scope.username, password: $scope.password, rememberMe: $scope.rememberMe}, (data)->
+      window.location.reload()
 ]

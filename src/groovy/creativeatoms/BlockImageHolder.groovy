@@ -1,9 +1,10 @@
 package creativeatoms
 
 import ru.mirari.infra.ca.face.CreativeAtomImageHolder
-import ru.mirari.infra.image.ImageFormat
 import ru.mirari.infra.image.ImageCropPolicy
+import ru.mirari.infra.image.ImageFormat
 import ru.mirari.infra.image.ImageType
+
 /**
  * @author alari
  * @since 9/2/12 1:06 AM
@@ -40,7 +41,7 @@ class BlockImageHolder implements CreativeAtomImageHolder {
 
     public static final ImageFormat IM_MAX = new ImageFormat("1920*1920", "im-max", ImageCropPolicy.NONE, ImageType.JPG);
 
-    public static final ImageFormat IM_STANDARD = new ImageFormat("600*500", "im-standard", ImageCropPolicy.NONE, ImageType.JPG);
+    public static final ImageFormat IM_STANDARD = new ImageFormat("980*750", "im-standard", ImageCropPolicy.NONE, ImageType.JPG);
 
     public static final ImageFormat IM_MEDIUM = new ImageFormat("180*180", "im-medium", ImageCropPolicy.CENTER, ImageType.JPG);
     public static final ImageFormat IM_SMALL = new ImageFormat("120*120", "im-small", ImageCropPolicy.CENTER, ImageType.JPG);
