@@ -47,6 +47,10 @@ grails.project.dependency.resolution = {
         compile 'org.pegdown:pegdown:latest.release'
         compile "org.jsoup:jsoup:latest.release"
 
+        compile "com.fasterxml.jackson.core:jackson-databind:latest.release"
+        compile "com.fasterxml.jackson.core:jackson-annotations:latest.release"
+        compile "com.fasterxml.jackson.core:jackson-core:latest.release"
+
         // runtime 'mysql:mysql-connector-java:5.1.20'
     }
 
@@ -54,6 +58,8 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:latest.integration"
         runtime ":resources:latest.integration"
+
+        test ":spock:latest.integration"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
@@ -74,6 +80,6 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.1"
 
-        compile ':cache:1.0.0'
+        compile ':cache:latest.integration'
     }
 }

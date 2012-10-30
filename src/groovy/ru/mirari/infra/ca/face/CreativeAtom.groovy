@@ -8,7 +8,7 @@ import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
  * @author alari
  * @since 9/1/12 9:21 PM
  */
-public interface CreativeAtom<C extends CreativeAtomContent, R extends CreativeAtomRawContent> {
+public interface CreativeAtom<C extends CreativeAtomContent> {
     public def getAtomId()
 
     public String getTitle()
@@ -26,10 +26,6 @@ public interface CreativeAtom<C extends CreativeAtomContent, R extends CreativeA
     public C getContent()
 
     void setContent(C content)
-
-    public R getRawContent()
-
-    void setRawContent(R rawContent)
 
     CreativeAtomContentDTO getContentDTO()
 

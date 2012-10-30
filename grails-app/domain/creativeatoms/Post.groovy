@@ -1,57 +1,38 @@
 package creativeatoms
 
-import ru.mirari.infra.chain.face.CreativeChain
-import ru.mirari.infra.chain.face.CreativeChainDTO
-import ru.mirari.infra.chain.CreativeChainBaseDTO
+import ru.mirari.infra.ca.ChainContent
 
-class Post implements CreativeChain<Block> {
+class Post {
 
     String title
 
-    List<Block> atoms = []
-
     boolean draft
 
-    static hasMany = [atoms:Block]
+    private ChainContent contentCache
+
+    static hasOne = [chainContent:String]
+    static transients = ['content', 'contentCache']
+
+    ChainContent getContent() {
+        if(!contentCache) {
+            if(chainContent) {
+                contentCache = ChainContent.forJson(chainContent)
+            }
+        }
+        contentCache
+    }
+
+    void setContent(ChainContent content) {
+        contentCache = content
+    }
+
+    def beforeSave() {
+        if(contentCache) {
+            chainContent = contentCache.toJson()
+        }
+    }
 
     static constraints = {
-    }
-
-    @Override
-    void addToAtoms(Block atom) {
-        atoms.add(atom)
-        atom.chain = this
-    }
-
-    @Override
-    boolean removeFromAtoms(Block atom) {
-        atoms.remove(atom)
-    }
-
-    @Override
-    void moveAtom(Block atom, int index) {
-        if(!atoms.contains(atom)) {
-            return;
-        }
-        final int oldIndex = atoms.indexOf(atom)
-        if(oldIndex == index) return;
-        List<Block> _atoms = []
-        _atoms.addAll(atoms.subList(0, Math.min(oldIndex,index)-1))
-        _atoms.add(index<oldIndex ? atom : atoms[Math.min(oldIndex,index)])
-        _atoms.addAll(atoms.subList(Math.min(oldIndex,index), Math.max(oldIndex,index)-1))
-        _atoms.add(index>oldIndex ? atom : atoms[Math.max(oldIndex,index)])
-        _atoms.addAll(atoms.subList(Math.max(oldIndex,index)+1, atoms.size()))
-        atoms = _atoms
-    }
-
-    @Override
-    CreativeChainDTO getDTO(boolean withAtoms) {
-        new CreativeChainBaseDTO(this, withAtoms)
-    }
-
-    @Override
-    def getChainId() {
-        id
     }
 
     boolean isDraft() {

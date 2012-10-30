@@ -2,7 +2,6 @@ package ru.mirari.infra.ca
 
 import ru.mirari.infra.ca.face.CreativeAtom
 import ru.mirari.infra.ca.face.CreativeAtomContent
-import ru.mirari.infra.ca.face.CreativeAtomRawContent
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.ca.content.CreativeAtomStrategy
@@ -12,7 +11,7 @@ import ru.mirari.infra.ca.content.CreativeAtomStrategiesHolder
  * @author alari
  * @since 9/8/12 11:28 PM
  */
-abstract class CreativeAtomBase<C extends CreativeAtomContent, R extends CreativeAtomRawContent> implements CreativeAtom<C,R> {
+abstract class CreativeAtomBase<C extends CreativeAtomContent> implements CreativeAtom<C> {
     String title = ""
 
     String typeName = ""

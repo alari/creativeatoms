@@ -3,12 +3,12 @@ package ru.mirari.infra.ca.content.internal
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.mirari.infra.ca.face.CreativeAtom
+import ru.mirari.infra.ca.face.CreativeAtomRepo
 import ru.mirari.infra.ca.face.dto.CreativeAtomContentDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomPushDTO
 import ru.mirari.infra.ca.face.dto.CreativeAtomUpdateDTO
 import ru.mirari.infra.file.FileInfo
 import ru.mirari.infra.text.TextProcessUtil
-import ru.mirari.infra.ca.face.CreativeAtomRepo
 
 /**
  * @author alari
@@ -20,9 +20,6 @@ class TextContentStrategy extends InternalContentStrategy {
     @Autowired private CreativeAtomRepo creativeAtomRepo
 
     private void initiateContent(CreativeAtom atom) {
-        if (!atom.rawContent) {
-            atom.rawContent = creativeAtomRepo.createRawContent()
-        }
         if (!atom.content) {
             atom.content = creativeAtomRepo.createContent()
         }
@@ -36,11 +33,10 @@ class TextContentStrategy extends InternalContentStrategy {
         atom.title = fileInfo.title
 
         if (fileInfo.extension.equalsIgnoreCase("txt")) {
-            atom.rawContent.text = fileInfo.file.getText()
+            atom.content.text = fileInfo.file.getText()
         } else if (fileInfo.extension in ["htm", "html"]) {
-            atom.rawContent.text = textProcessUtil.htmlToMarkdown(fileInfo.file.getText())
+            atom.content.text = textProcessUtil.htmlToMarkdown(fileInfo.file.getText())
         }
-        atom.content.text = textProcessUtil.markdownToHtml(atom.rawContent.text)
     }
 
     @Override
@@ -48,8 +44,7 @@ class TextContentStrategy extends InternalContentStrategy {
         if (super.setContent(atom, dto)) return true;
         if (dto.text) {
             initiateContent(atom)
-            atom.rawContent.text = dto.text
-            atom.content.text = textProcessUtil.markdownToHtml(atom.rawContent.text)
+            atom.content.text = dto.text
             return true
         }
         return false
@@ -75,7 +70,7 @@ class TextContentStrategy extends InternalContentStrategy {
     @Override
     CreativeAtomUpdateDTO getUpdateDTO(CreativeAtom atom, CreativeAtomUpdateDTO dto = null) {
         dto = super.getBaseUpdateDTO(atom, dto)
-        dto.text = atom.rawContent.text
+        dto.text = textProcessUtil.markdownToHtml atom.content.text
         dto
     }
 }

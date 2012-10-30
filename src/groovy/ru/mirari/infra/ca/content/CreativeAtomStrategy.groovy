@@ -31,7 +31,7 @@ abstract class CreativeAtomStrategy {
 
     abstract boolean isUrlSupported(URL url);
 
-    private String name
+    private volatile String name
 
     String getName() {
         if(name == null) {

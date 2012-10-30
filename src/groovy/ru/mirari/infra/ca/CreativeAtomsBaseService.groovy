@@ -16,9 +16,9 @@ import ru.mirari.infra.chain.face.CreativeChainService
  * @author alari
  * @since 9/8/12 6:14 PM
  */
-class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomContent, R extends CreativeAtomRawContent> implements CreativeAtomsService<A, C, R> {
+class CreativeAtomsBaseService<A extends CreativeAtom, C extends CreativeAtomContent> implements CreativeAtomsService<A, C> {
     @Autowired
-    CreativeAtomRepo<A,C,R> creativeAtomRepo
+    CreativeAtomRepo<A,C> creativeAtomRepo
 
     @Autowired
     CreativeAtomStrategiesHolder creativeAtomStrategiesHolder
