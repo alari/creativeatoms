@@ -35,12 +35,13 @@
                 }
                 var xdr;
                 return {
-                    send: function (headers, completeCallback) {
+                    send:function (headers, completeCallback) {
                         function callback(status, statusText, responses, responseHeaders) {
                             xdr.onload = xdr.onerror = xdr.ontimeout = $.noop;
                             xdr = null;
                             completeCallback(status, statusText, responses, responseHeaders);
                         }
+
                         xdr = new XDomainRequest();
                         // XDomainRequest only supports GET and POST:
                         if (s.type === 'DELETE') {
@@ -57,7 +58,7 @@
                             callback(
                                 200,
                                 'OK',
-                                {text: xdr.responseText},
+                                {text:xdr.responseText},
                                 'Content-Type: ' + xdr.contentType
                             );
                         };
@@ -72,7 +73,7 @@
                         }
                         xdr.send((s.hasContent && s.data) || null);
                     },
-                    abort: function () {
+                    abort:function () {
                         if (xdr) {
                             xdr.onerror = $.noop();
                             xdr.abort();

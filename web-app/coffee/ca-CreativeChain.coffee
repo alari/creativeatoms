@@ -21,7 +21,7 @@ m.controller 'ChainCtr', ($scope, CreativeChain)->
   $scope.delete = ->
     $scope.chain.$delete {id: $scope.chain.id}
 
-  # Chains query controller
+# Chains query controller
 m.controller 'ChainQueryCtr', ($scope, CreativeChain)->
   $scope.chains = CreativeChain.query() || []
 

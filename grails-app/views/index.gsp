@@ -1,14 +1,15 @@
 <!doctype html>
 <html>
-	<head>
-		<meta name="layout" content="main"/>
-        <r:require modules="angular,angular-bootstrap,angular-ui,ca-app"/>
-	</head>
-	<body>
+<head>
+    <meta name="layout" content="main"/>
+    <r:require modules="angular,angular-bootstrap,angular-ui,ca-app"/>
+</head>
 
-    <div ng-controller="RootCtr" ng-include src="'/html/root.html'">
+<body>
 
-    </div>
+<div ng-controller="RootCtr" ng-include src="'/html/root.html'">
 
-	</body>
+</div>
+
+</body>
 </html>

@@ -2,7 +2,6 @@ package ru.mirari.infra.ca.strategy.file
 
 import org.springframework.stereotype.Component
 import ru.mirari.infra.ca.Atom
-import ru.mirari.infra.ca.content.CreativeAtomData
 import ru.mirari.infra.ca.strategy.SoundType
 import ru.mirari.infra.file.FileHolder
 import ru.mirari.infra.file.FileInfo

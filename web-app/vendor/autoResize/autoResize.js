@@ -9,23 +9,29 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. */
 
-(function($){
+(function ($) {
 
     var uid = 'ar' + +new Date,
 
         defaults = autoResize.defaults = {
-            onResize: function(){},
-            onBeforeResize: function(){return 123},
-            onAfterResize: function(){return 555},
-            animate: {
-                duration: 200,
-                complete: function(){}
+            onResize:function () {
             },
-            extraSpace: 50,
-            minHeight: 'original',
-            maxHeight: 500,
-            minWidth: 'original',
-            maxWidth: 500
+            onBeforeResize:function () {
+                return 123
+            },
+            onAfterResize:function () {
+                return 555
+            },
+            animate:{
+                duration:200,
+                complete:function () {
+                }
+            },
+            extraSpace:50,
+            minHeight:'original',
+            maxHeight:500,
+            minWidth:'original',
+            maxWidth:500
         };
 
     autoResize.cloneCSSProperties = [
@@ -36,11 +42,11 @@
     ];
 
     autoResize.cloneCSSValues = {
-        position: 'absolute',
-        top: -9999,
-        left: -9999,
-        opacity: 0,
-        overflow: 'hidden'
+        position:'absolute',
+        top:-9999,
+        left:-9999,
+        opacity:0,
+        overflow:'hidden'
     };
 
     autoResize.resizableFilterSelector = [
@@ -57,8 +63,8 @@
     $.fn.autoResize = autoResize;
 
     function autoResize(config) {
-        this.filter(autoResize.resizableFilterSelector).each(function(){
-            new AutoResizer( $(this), config );
+        this.filter(autoResize.resizableFilterSelector).each(function () {
+            new AutoResizer($(this), config);
         });
         return this;
     }
@@ -86,16 +92,16 @@
 
         if (this.nodeName === 'textarea') {
             el.css({
-                resize: 'none',
-                overflowY: 'hidden'
+                resize:'none',
+                overflowY:'hidden'
             });
         }
 
         el.data('AutoResizer', this);
 
         // Make sure onAfterResize is called upon animation completion
-        config.animate.complete = (function(f){
-            return function() {
+        config.animate.complete = (function (f) {
+            return function () {
                 config.onAfterResize.call(el);
                 return f.apply(this, arguments);
             };
@@ -107,9 +113,9 @@
 
     AutoResizer.prototype = {
 
-        bind: function() {
+        bind:function () {
 
-            var check = $.proxy(function(){
+            var check = $.proxy(function () {
                 this.check();
                 return true;
             }, this);
@@ -120,8 +126,10 @@
                 .bind('keyup.autoResize', check)
                 //.bind('keydown.autoResize', check)
                 .bind('change.autoResize', check)
-                .bind('paste.autoResize', function() {
-                    setTimeout(function() { check(); }, 0);
+                .bind('paste.autoResize', function () {
+                    setTimeout(function () {
+                        check();
+                    }, 0);
                 });
 
             if (!this.el.is(':hidden')) {
@@ -130,18 +138,18 @@
 
         },
 
-        unbind: function() {
+        unbind:function () {
             this.el.unbind('.autoResize');
         },
 
-        createClone: function() {
+        createClone:function () {
 
             var el = this.el,
                 clone = this.nodeName === 'textarea' ? el.clone() : $('<span/>');
 
             this.clone = clone;
 
-            $.each(autoResize.cloneCSSProperties, function(i, p){
+            $.each(autoResize.cloneCSSProperties, function (i, p) {
                 clone[0].style[p] = el.css(p);
             });
 
@@ -156,13 +164,13 @@
                 clone.height('auto');
             } else {
                 clone.width('auto').css({
-                    whiteSpace: 'nowrap'
+                    whiteSpace:'nowrap'
                 });
             }
 
         },
 
-        check: function(e, immediate) {
+        check:function (e, immediate) {
 
             if (!this.clone) {
                 this.createClone();
@@ -175,7 +183,9 @@
                 value = el.val();
 
             // Do nothing if value hasn't changed
-            if (value === this.prevValue) { return true; }
+            if (value === this.prevValue) {
+                return true;
+            }
             this.prevValue = value;
 
             if (this.nodeName === 'input') {
@@ -201,8 +211,8 @@
                     el.scrollLeft(0);
 
                     if (config.animate && !immediate) {
-                        el.stop(1,1).animate({
-                            width: newWidth
+                        el.stop(1, 1).animate({
+                            width:newWidth
                         }, config.animate);
                     } else {
                         el.width(newWidth);
@@ -244,8 +254,8 @@
 
             // Either animate or directly apply height:
             if (config.animate && !immediate) {
-                el.stop(1,1).animate({
-                    height: scrollTop
+                el.stop(1, 1).animate({
+                    height:scrollTop
                 }, config.animate);
             } else {
                 el.height(scrollTop);
@@ -254,7 +264,7 @@
 
         },
 
-        destroy: function() {
+        destroy:function () {
             this.unbind();
             this.el.removeData('AutoResizer');
             this.clone.remove();
@@ -262,7 +272,7 @@
             delete this.clone;
         },
 
-        injectClone: function() {
+        injectClone:function () {
             (
                 autoResize.cloneContainer ||
                     (autoResize.cloneContainer = $('<arclones/>').appendTo('body'))

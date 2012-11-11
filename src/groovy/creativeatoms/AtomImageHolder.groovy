@@ -1,20 +1,20 @@
 package creativeatoms
 
-import ru.mirari.infra.ca.face.CreativeAtomImageHolder
 import ru.mirari.infra.image.ImageCropPolicy
 import ru.mirari.infra.image.ImageFormat
+import ru.mirari.infra.image.ImageHolder
 import ru.mirari.infra.image.ImageType
 
 /**
  * @author alari
  * @since 9/2/12 1:06 AM
  */
-class BlockImageHolder implements CreativeAtomImageHolder {
+class AtomImageHolder implements ImageHolder {
     private final String atomId
     public final String imagesPath
     public final String imagesBucket = "mirariimages"
 
-    BlockImageHolder(Object atomId) {
+    AtomImageHolder(Object atomId) {
         this.atomId = atomId.toString()
         imagesPath = "i/".concat(atomId.toString())
     }

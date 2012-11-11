@@ -12,7 +12,7 @@ modules = {
         dependsOn 'angular', 'ca-base'
     }
     'ca-app' {
-        resource url:'coffee/ca-app.coffee'
+        resource url: 'coffee/ca-app.coffee'
         dependsOn 'ca-ui', 'ca-CreativeAtom', 'ca-CreativeChain', 'ca-base'
     }
     'ca-base' {
@@ -25,33 +25,33 @@ modules = {
      */
     'custom-bootstrap' {
         dependsOn 'bootstrap'
-        resource url:[dir: 'less', file: 'variables.less'], attrs:[rel: "stylesheet/less", type:'css']
+        resource url: [dir: 'less', file: 'variables.less'], attrs: [rel: "stylesheet/less", type: 'css']
     }
 
     /**
      * VENDORS RESOURCES
      */
-    'angular-ui'{
-        resource url:'vendor/angular-ui/angular-ui.min.js'
-        resource url:'vendor/angular-ui/angular-ui.min.css'
-        resource url:'vendor/angular-ui/angular-ui-ieshiv.min.js'
+    'angular-ui' {
+        resource url: 'vendor/angular-ui/angular-ui.min.js'
+        resource url: 'vendor/angular-ui/angular-ui.min.css'
+        resource url: 'vendor/angular-ui/angular-ui-ieshiv.min.js'
         dependsOn "angular"
     }
 
-    'jquery-file-upload'{
+    'jquery-file-upload' {
         resource url: "vendor/blueimp-jQuery-File-Upload/js/jquery.iframe-transport.js"
         resource url: "vendor/blueimp-jQuery-File-Upload/js/vendor/jquery.ui.widget.js"
         resource url: "vendor/blueimp-jQuery-File-Upload/js/jquery.fileupload.js"
         dependsOn "jquery"
     }
 
-    'mediaelementplayer'{
+    'mediaelementplayer' {
         resource url: "vendor/mediaelement/mediaelement-and-player.min.js"
         resource url: "vendor/mediaelement/mediaelementplayer.min.css"
         dependsOn "jquery"
     }
 
-    'autoResize'{
+    'autoResize' {
         resource url: "vendor/autoResize/autoResize.js"
         dependsOn 'jquery'
     }

@@ -10,12 +10,12 @@ class Post {
 
     private ChainContent contentCache
 
-    static hasOne = [chainContent:String]
+    static hasOne = [chainContent: String]
     static transients = ['content', 'contentCache']
 
     ChainContent getContent() {
-        if(!contentCache) {
-            if(chainContent) {
+        if (!contentCache) {
+            if (chainContent) {
                 contentCache = ChainContent.forJson(chainContent)
             }
         }
@@ -26,8 +26,14 @@ class Post {
         contentCache = content
     }
 
-    def beforeSave() {
-        if(contentCache) {
+    def beforeUpdate() {
+        if (contentCache) {
+            chainContent = contentCache.toJson()
+        }
+    }
+
+    def beforeInsert() {
+        if (contentCache) {
             chainContent = contentCache.toJson()
         }
     }

@@ -17,42 +17,42 @@
     'use strict';
     var path = require('path'),
         fs = require('fs'),
-        // Since Node 0.8, .existsSync() moved from path to fs:
+    // Since Node 0.8, .existsSync() moved from path to fs:
         _existsSync = fs.existsSync || path.existsSync,
         formidable = require('formidable'),
         nodeStatic = require('node-static'),
         imageMagick = require('imagemagick'),
         options = {
-            tmpDir: __dirname + '/tmp',
-            publicDir: __dirname + '/public',
-            uploadDir: __dirname + '/public/files',
-            uploadUrl: '/files/',
-            maxPostSize: 500000000, // 500 MB
-            minFileSize: 1,
-            maxFileSize: 100000000, // 100 MB
-            acceptFileTypes: /.+/i,
+            tmpDir:__dirname + '/tmp',
+            publicDir:__dirname + '/public',
+            uploadDir:__dirname + '/public/files',
+            uploadUrl:'/files/',
+            maxPostSize:500000000, // 500 MB
+            minFileSize:1,
+            maxFileSize:100000000, // 100 MB
+            acceptFileTypes:/.+/i,
             // Files not matched by this regular expression force a download dialog,
             // to prevent executing any scripts in the context of the service domain:
-            safeFileTypes: /\.(gif|jpe?g|png)$/i,
-            imageTypes: /\.(gif|jpe?g|png)$/i,
-            imageVersions: {
-                'thumbnail': {
-                    width: 80,
-                    height: 80
+            safeFileTypes:/\.(gif|jpe?g|png)$/i,
+            imageTypes:/\.(gif|jpe?g|png)$/i,
+            imageVersions:{
+                'thumbnail':{
+                    width:80,
+                    height:80
                 }
             },
-            accessControl: {
-                allowOrigin: '*',
-                allowMethods: 'OPTIONS, HEAD, GET, POST, PUT, DELETE'
+            accessControl:{
+                allowOrigin:'*',
+                allowMethods:'OPTIONS, HEAD, GET, POST, PUT, DELETE'
             },
             /* Uncomment and edit this section to provide the service via HTTPS:
-            ssl: {
-                key: fs.readFileSync('/Applications/XAMPP/etc/ssl.key/server.key'),
-                cert: fs.readFileSync('/Applications/XAMPP/etc/ssl.crt/server.crt')
-            },
-            */
-            nodeStatic: {
-                cache: 3600 // seconds to cache served files
+             ssl: {
+             key: fs.readFileSync('/Applications/XAMPP/etc/ssl.key/server.key'),
+             cert: fs.readFileSync('/Applications/XAMPP/etc/ssl.crt/server.crt')
+             },
+             */
+            nodeStatic:{
+                cache:3600 // seconds to cache served files
             }
         },
         utf8encode = function (str) {
@@ -86,7 +86,7 @@
             var handleResult = function (result, redirect) {
                     if (redirect) {
                         res.writeHead(302, {
-                            'Location': redirect.replace(
+                            'Location':redirect.replace(
                                 /%s/,
                                 encodeURIComponent(JSON.stringify(result))
                             )
@@ -94,9 +94,9 @@
                         res.end();
                     } else {
                         res.writeHead(200, {
-                            'Content-Type': req.headers.accept
+                            'Content-Type':req.headers.accept
                                 .indexOf('application/json') !== -1 ?
-                                        'application/json' : 'text/plain'
+                                'application/json' : 'text/plain'
                         });
                         res.end(JSON.stringify(result));
                     }
@@ -108,32 +108,32 @@
                 },
                 handler = new UploadHandler(req, res, handleResult);
             switch (req.method) {
-            case 'OPTIONS':
-                res.end();
-                break;
-            case 'HEAD':
-            case 'GET':
-                if (req.url === '/') {
-                    setNoCacheHeaders();
-                    if (req.method === 'GET') {
-                        handler.get();
+                case 'OPTIONS':
+                    res.end();
+                    break;
+                case 'HEAD':
+                case 'GET':
+                    if (req.url === '/') {
+                        setNoCacheHeaders();
+                        if (req.method === 'GET') {
+                            handler.get();
+                        } else {
+                            res.end();
+                        }
                     } else {
-                        res.end();
+                        fileServer.serve(req, res);
                     }
-                } else {
-                    fileServer.serve(req, res);
-                }
-                break;
-            case 'POST':
-                setNoCacheHeaders();
-                handler.post();
-                break;
-            case 'DELETE':
-                handler.destroy();
-                break;
-            default:
-                res.statusCode = 405;
-                res.end();
+                    break;
+                case 'POST':
+                    setNoCacheHeaders();
+                    handler.post();
+                    break;
+                case 'DELETE':
+                    handler.destroy();
+                    break;
+                default:
+                    res.statusCode = 405;
+                    res.end();
             }
         };
     fileServer.respond = function (pathname, status, _headers, files, stat, req, res, finish) {
@@ -176,8 +176,8 @@
             this.url = this.delete_url = baseUrl + encodeURIComponent(this.name);
             Object.keys(options.imageVersions).forEach(function (version) {
                 if (_existsSync(
-                        options.uploadDir + '/' + version + '/' + that.name
-                    )) {
+                    options.uploadDir + '/' + version + '/' + that.name
+                )) {
                     that[version + '_url'] = baseUrl + version + '/' +
                         encodeURIComponent(that.name);
                 }
@@ -193,8 +193,8 @@
                     fileInfo;
                 if (stats.isFile()) {
                     fileInfo = new FileInfo({
-                        name: name,
-                        size: stats.size
+                        name:name,
+                        size:stats.size
                     });
                     fileInfo.initUrls(handler.req);
                     files.push(fileInfo);
@@ -221,46 +221,46 @@
                 }
             };
         form.uploadDir = options.tmpDir;
-        form.on('fileBegin', function (name, file) {
+        form.on('fileBegin',function (name, file) {
             tmpFiles.push(file.path);
             var fileInfo = new FileInfo(file, handler.req, true);
             fileInfo.safeName();
             map[path.basename(file.path)] = fileInfo;
             files.push(fileInfo);
-        }).on('field', function (name, value) {
-            if (name === 'redirect') {
-                redirect = value;
-            }
-        }).on('file', function (name, file) {
-            var fileInfo = map[path.basename(file.path)];
-            fileInfo.size = file.size;
-            if (!fileInfo.validate()) {
-                fs.unlink(file.path);
-                return;
-            }
-            fs.renameSync(file.path, options.uploadDir + '/' + fileInfo.name);
-            if (options.imageTypes.test(fileInfo.name)) {
-                Object.keys(options.imageVersions).forEach(function (version) {
-                    counter += 1;
-                    var opts = options.imageVersions[version];
-                    imageMagick.resize({
-                        width: opts.width,
-                        height: opts.height,
-                        srcPath: options.uploadDir + '/' + fileInfo.name,
-                        dstPath: options.uploadDir + '/' + version + '/' +
-                            fileInfo.name
-                    }, finish);
+        }).on('field',function (name, value) {
+                if (name === 'redirect') {
+                    redirect = value;
+                }
+            }).on('file',function (name, file) {
+                var fileInfo = map[path.basename(file.path)];
+                fileInfo.size = file.size;
+                if (!fileInfo.validate()) {
+                    fs.unlink(file.path);
+                    return;
+                }
+                fs.renameSync(file.path, options.uploadDir + '/' + fileInfo.name);
+                if (options.imageTypes.test(fileInfo.name)) {
+                    Object.keys(options.imageVersions).forEach(function (version) {
+                        counter += 1;
+                        var opts = options.imageVersions[version];
+                        imageMagick.resize({
+                            width:opts.width,
+                            height:opts.height,
+                            srcPath:options.uploadDir + '/' + fileInfo.name,
+                            dstPath:options.uploadDir + '/' + version + '/' +
+                                fileInfo.name
+                        }, finish);
+                    });
+                }
+            }).on('aborted',function () {
+                tmpFiles.forEach(function (file) {
+                    fs.unlink(file);
                 });
-            }
-        }).on('aborted', function () {
-            tmpFiles.forEach(function (file) {
-                fs.unlink(file);
-            });
-        }).on('progress', function (bytesReceived, bytesExpected) {
-            if (bytesReceived > options.maxPostSize) {
-                handler.req.connection.destroy();
-            }
-        }).on('end', finish).parse(handler.req);
+            }).on('progress',function (bytesReceived, bytesExpected) {
+                if (bytesReceived > options.maxPostSize) {
+                    handler.req.connection.destroy();
+                }
+            }).on('end', finish).parse(handler.req);
     };
     UploadHandler.prototype.destroy = function () {
         var handler = this,

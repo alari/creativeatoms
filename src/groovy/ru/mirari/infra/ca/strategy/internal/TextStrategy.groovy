@@ -48,7 +48,7 @@ class TextStrategy extends InternalStrategy {
     }
 
     @Override
-    Atom getForUpdate(Atom atom) {
+    Atom getForRender(Atom atom) {
         atom.text = textProcessUtil.markdownToHtml atom.text
         atom
     }

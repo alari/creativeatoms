@@ -3,7 +3,7 @@ package creativeatoms.shiro
 class Role {
     String name
 
-    static hasMany = [ users: User, permissions: String ]
+    static hasMany = [users: User, permissions: String]
     static belongsTo = User
 
     static constraints = {

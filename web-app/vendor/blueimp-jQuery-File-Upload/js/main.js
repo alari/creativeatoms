@@ -31,36 +31,36 @@ $(function () {
     if (window.location.hostname === 'blueimp.github.com') {
         // Demo settings:
         $('#fileupload').fileupload('option', {
-            url: '//jquery-file-upload.appspot.com/',
-            maxFileSize: 5000000,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            process: [
+            url:'//jquery-file-upload.appspot.com/',
+            maxFileSize:5000000,
+            acceptFileTypes:/(\.|\/)(gif|jpe?g|png)$/i,
+            process:[
                 {
-                    action: 'load',
-                    fileTypes: /^image\/(gif|jpeg|png)$/,
-                    maxFileSize: 20000000 // 20MB
+                    action:'load',
+                    fileTypes:/^image\/(gif|jpeg|png)$/,
+                    maxFileSize:20000000 // 20MB
                 },
                 {
-                    action: 'resize',
-                    maxWidth: 1440,
-                    maxHeight: 900
+                    action:'resize',
+                    maxWidth:1440,
+                    maxHeight:900
                 },
                 {
-                    action: 'save'
+                    action:'save'
                 }
             ]
         });
         // Upload server status check for browsers with CORS support:
         if ($.support.cors) {
             $.ajax({
-                url: '//jquery-file-upload.appspot.com/',
-                type: 'HEAD'
+                url:'//jquery-file-upload.appspot.com/',
+                type:'HEAD'
             }).fail(function () {
-                $('<span class="alert alert-error"/>')
-                    .text('Upload server currently unavailable - ' +
-                            new Date())
-                    .appendTo('#fileupload');
-            });
+                    $('<span class="alert alert-error"/>')
+                        .text('Upload server currently unavailable - ' +
+                        new Date())
+                        .appendTo('#fileupload');
+                });
         }
     } else {
         // Load existing files:
@@ -69,7 +69,7 @@ $(function () {
             $.getJSON(this.action, function (result) {
                 if (result && result.length) {
                     $(that).fileupload('option', 'done')
-                        .call(that, null, {result: result});
+                        .call(that, null, {result:result});
                 }
             });
         });

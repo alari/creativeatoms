@@ -3,12 +3,11 @@ package ru.mirari.infra.ca.strategy.file
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.mirari.infra.ca.Atom
-import ru.mirari.infra.ca.face.CreativeAtomImageHolder
-import ru.mirari.infra.ca.face.CreativeAtomImageHolderProvider
 import ru.mirari.infra.ca.strategy.internal.InternalStrategy
 import ru.mirari.infra.file.FileInfo
 import ru.mirari.infra.image.ImageFormat
 import ru.mirari.infra.image.ImageStorageService
+import ru.mirari.infra.image.ImageHolder
 
 /**
  * @author alari
@@ -18,10 +17,10 @@ import ru.mirari.infra.image.ImageStorageService
 class ImageStrategy extends InternalStrategy {
     @Autowired
     private ImageStorageService imageStorageService
-    @Autowired
-    private CreativeAtomImageHolderProvider creativeAtomImageHolderProvider
+    //@Autowired
+    //private creativeAtomImageHolderProvider
 
-    private CreativeAtomImageHolder getImageHolder(Atom atom) {
+    private ImageHolder getImageHolder(Atom atom) {
         creativeAtomImageHolderProvider.getImageHolder(atom)
     }
 
@@ -44,7 +43,7 @@ class ImageStrategy extends InternalStrategy {
 
     @Override
     Atom getForRender(Atom atom) {
-        CreativeAtomImageHolder holder = getImageHolder(atom)
+        ImageHolder holder = getImageHolder(atom)
         holder.imageFormats.each {ImageFormat format ->
             atom.images.put(format.name, imageStorageService.getUrl(holder, format))
         }

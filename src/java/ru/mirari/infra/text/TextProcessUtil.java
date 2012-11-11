@@ -6,6 +6,8 @@ package ru.mirari.infra.text;
  */
 public interface TextProcessUtil {
     public String cleanHtml(String unsafe);
+
     public String markdownToHtml(String text);
+
     public String htmlToMarkdown(String theHTML);
 }
